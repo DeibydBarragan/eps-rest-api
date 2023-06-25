@@ -16,7 +16,7 @@ const postAppointment = async (req: Request, res: Response) => {
     const response = await insertAppointment(req.body)
     res.send(response)
   } catch (error) {
-    handleHttp(res, 'ERROR_POSTING_APPOINTMENT')
+    handleHttp(res, 'ERROR_POSTING_APPOINTMENT', error)
   }
 }
 

@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express"
 import { listAllDoctors, postDoctor } from "../controllers/doctor"
+import { validatePostDoctor } from "../validators/doctors"
 
 const doctorRoutes = Router()
 
@@ -14,6 +15,6 @@ doctorRoutes.get("/api/doctors", listAllDoctors)
  * [POST]
  * Create a doctor
  */
-doctorRoutes.post("/api/doctors", postDoctor)
+doctorRoutes.post("/api/doctors", validatePostDoctor, postDoctor)
 
 export default doctorRoutes

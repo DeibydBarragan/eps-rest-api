@@ -10,4 +10,8 @@ const getAllDoctors = async () => {
   return await DoctorModel.find({})
 }
 
-export { insertDoctor, getAllDoctors }
+const getDoctorById = async (id: string) => {
+  return await DoctorModel.findById(id)
+}
+
+export { insertDoctor, getAllDoctors, getDoctorById }
