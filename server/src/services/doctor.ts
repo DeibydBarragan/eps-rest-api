@@ -6,12 +6,12 @@ const insertDoctor = async (doctor: Doctor) => {
   return await DoctorModel.create(doctor)
 }
 
-const getAllDoctors = async () => {
-  return await DoctorModel.find({})
+const getDoctors = async (limit:string = '10', page:string = '10') => {
+  return await DoctorModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
 }
 
 const getDoctorById = async (id: string) => {
   return await DoctorModel.findById(id)
 }
 
-export { insertDoctor, getAllDoctors, getDoctorById }
+export { insertDoctor, getDoctors, getDoctorById }

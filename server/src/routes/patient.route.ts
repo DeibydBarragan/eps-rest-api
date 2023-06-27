@@ -1,15 +1,15 @@
 import { Router } from "express"
-import { listAllPatients, postPatient } from "../controllers/patient"
+import { listPatients, postPatient } from "../controllers/patient"
 import { validatePostPatient } from "../validators/patients"
 
 const patientRoutes = Router()
 
 /**
  * http://localhost:PORT/api/patients
- * Get all patients
+ * Get patients
  * [GET]
  */
-patientRoutes.get("/api/patients", listAllPatients)
+patientRoutes.get("/api/patients", listPatients)
 
 /**
  * [POST]

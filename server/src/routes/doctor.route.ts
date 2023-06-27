@@ -1,15 +1,15 @@
 import { Request, Response, Router } from "express"
-import { listAllDoctors, postDoctor } from "../controllers/doctor"
+import { listDoctors, postDoctor } from "../controllers/doctor"
 import { validatePostDoctor } from "../validators/doctors"
 
 const doctorRoutes = Router()
 
 /**
  * http://localhost:PORT/api/doctors
- * Get all doctors
+ * Get doctors
  * [GET]
  */
-doctorRoutes.get("/api/doctors", listAllDoctors)
+doctorRoutes.get("/api/doctors", listDoctors)
 
 /**
  * [POST]

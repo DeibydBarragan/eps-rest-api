@@ -1,15 +1,15 @@
 import { Request, Response, Router } from "express"
-import { listAllAppointments, postAppointment } from "../controllers/appointment"
+import { listAppointments, postAppointment } from "../controllers/appointment"
 import { validatePostAppointment } from "../validators/appointments"
 
 const appointmentRoutes = Router()
 
 /**
  * http://localhost:PORT/api/appointments
- * Get all appointments
+ * Get appointments
  * [GET]
  */
-appointmentRoutes.get("/api/appointments", listAllAppointments)
+appointmentRoutes.get("/api/appointments", listAppointments)
 
 /**
  * [POST]

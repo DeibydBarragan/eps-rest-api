@@ -1,13 +1,14 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { insertPatient, getAllPatients } from "../services/patient"
+import { insertPatient, getPatients } from "../services/patient"
 
-const listAllPatients = async (req: Request, res: Response) => {
+const listPatients = async (req: Request, res: Response) => {
   try {
-    const response = await getAllPatients()
+    const { limit, page } = req.query
+    const response = await getPatients(limit?.toString(), page?.toString())
     res.send(response)
   } catch (error) {
-    handleHttp(res, 'ERROR_GETTING_ALL_PATIENTS')
+    handleHttp(res, 'ERROR_GETTING_PATIENTS')
   }
 }
 
@@ -20,4 +21,4 @@ const postPatient = async (req: Request, res: Response) => {
   }
 }
 
-export { listAllPatients, postPatient }
+export { listPatients, postPatient }

@@ -5,8 +5,8 @@ const insertAppointment = async (appointment: Appointment) => {
   return await AppointmentModel.create(appointment)
 }
 
-const getAllAppointments = async () => {
-  return await AppointmentModel.find({})
+const getAppointments = async (limit:string = '10', page:string = '10') => {
+  return await AppointmentModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
 }
 
-export { insertAppointment, getAllAppointments }
+export { insertAppointment, getAppointments }

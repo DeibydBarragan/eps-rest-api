@@ -1,5 +1,6 @@
-import { Schema, model } from "mongoose"
+import mongoose, { Schema, model } from "mongoose"
 import { Doctor } from "../interfaces/doctor.interface"
+import paginate from 'mongoose-paginate-v2';
 
 const DoctorSchema = new Schema<Doctor>(
   {
@@ -17,5 +18,17 @@ const DoctorSchema = new Schema<Doctor>(
   }
 )
 
-const DoctorModel = model('doctor', DoctorSchema)
+
+// add mongoose paginate to the schema
+DoctorSchema.plugin(paginate)
+
+// declare a mongoose document based on a Typescript interface representing your schema
+interface DoctorDocument extends mongoose.Document, Doctor {}
+
+// create the paginated model
+const DoctorModel = mongoose.model<
+  DoctorDocument,
+  mongoose.PaginateModel<DoctorDocument>
+>('Doctor', DoctorSchema, 'doctors');
+
 export default DoctorModel

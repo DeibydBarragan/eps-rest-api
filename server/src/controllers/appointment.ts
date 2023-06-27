@@ -1,13 +1,14 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { getAllAppointments, insertAppointment } from "../services/appointment"
+import { getAppointments, insertAppointment } from "../services/appointment"
 
-const listAllAppointments = async (req: Request, res: Response) => {
+const listAppointments = async (req: Request, res: Response) => {
   try {
-    const response = await getAllAppointments()
+    const { limit, page } = req.query
+    const response = await getAppointments(limit?.toString(), page?.toString())
     res.send(response)
   } catch (error) {
-    handleHttp(res, 'ERROR_GETTING_ALL_APPOINTMENTS', error)
+    handleHttp(res, 'ERROR_GETTING_APPOINTMENTS', error)
   }
 }
 
@@ -20,4 +21,4 @@ const postAppointment = async (req: Request, res: Response) => {
   }
 }
 
-export { listAllAppointments, postAppointment }
+export { listAppointments, postAppointment }
