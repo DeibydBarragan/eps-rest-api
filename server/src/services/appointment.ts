@@ -5,7 +5,7 @@ const insertAppointment = async (appointment: Appointment) => {
   return await AppointmentModel.create(appointment)
 }
 
-const getAppointments = async (limit:string = '10', page:string = '10') => {
+const getAppointments = async (limit:string = '10', page:string = '1') => {
   return await AppointmentModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
 }
 

@@ -5,7 +5,7 @@ const insertPatient = async (patient: Patient) => {
   return await PatientModel.create(patient)
 }
 
-const getPatients = async (limit:string = '10', page:string = '10') => {
+const getPatients = async (limit:string = '10', page:string = '1') => {
   return await PatientModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
 }
 

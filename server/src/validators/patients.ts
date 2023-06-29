@@ -23,7 +23,7 @@ const validatePostPatient = [
        */
       const patient = await PatientModel.findOne({ cedula: value })
       if (patient) {
-        return Promise.reject('Cedula already in use')
+        throw new Error('Cedula already in use')
       }
     }),
   check('age')
@@ -32,7 +32,16 @@ const validatePostPatient = [
     .isLength({ min: 1, max: 3 }).withMessage('Age must be 1 to 3 characters long'),
   check('email')
     .exists().withMessage('Email is required')
-    .isEmail().withMessage('Email must be a valid email'),
+    .isEmail().withMessage('Email must be a valid email')
+    .custom(async (value) => {
+      /**
+       * Check if email is already in use
+       */
+      const patient = await PatientModel.findOne({ email: value })
+      if (patient) {
+        throw new Error('Email already in use')
+      }
+    }),
   check('phone')
     .exists().withMessage('Phone is required')
     .isNumeric().withMessage('Phone must be a number')
