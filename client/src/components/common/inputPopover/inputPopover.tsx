@@ -1,4 +1,4 @@
-import { Text, Popover } from '@nextui-org/react'
+import { Container, Tooltip } from '@nextui-org/react'
 import React from 'react'
 import { FieldError } from 'react-hook-form'
 
@@ -9,19 +9,20 @@ type Props = {
 
 const InputPopover = ({ error, children }: Props) => {
   return (
-    <Popover
-      isOpen={error?.message ? true : false}
-      isDismissable={false}
-      placement='bottom-right'
-      
+    <Tooltip
+      initialVisible={true}
+      visible={error?.message ? true : false}
+      content={error?.message}
+      color='error'
+      placement='bottomStart'
+      css={{
+        zIndex: '10000 !important',
+      }}
+      style={{ width: '100%', height: '80%' }}
+      as='div'
     >
-      <Popover.Trigger>
-        {children}
-      </Popover.Trigger>
-      <Popover.Content css={{ p: '$5', background: '$error' }}>
-        <Text color='white' >{error?.message}</Text>
-      </Popover.Content>
-    </Popover>
+      {children}
+    </Tooltip>
   )
 }
 

@@ -1,15 +1,14 @@
-import PostPatient from '@/components/forms/patients/PostPatient'
 import useGetItems from '@/components/hooks/useGetItems'
 import { Container, Loading, Row, Table, Text, Popover, Pagination, Button } from '@nextui-org/react'
 import React from 'react'
-import PostAppointment from '@/components/forms/appointments/PostAppointment'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
+import PostDoctor from '@/components/forms/doctors/PostDoctor'
 
 type Props = {}
 
-export default function Patients({}: Props) {
+export default function Doctors({}: Props) {
   // Pagination
-  const [ patients, loadingPatients, pagination, actualPage, setActualPage, getPatients, error ] = useGetItems('patients')
+  const [ doctors, loadingDoctors, pagination, actualPage, setActualPage, getDoctors, error ] = useGetItems('doctors')
 
   return (
     <Container
@@ -30,12 +29,14 @@ export default function Patients({}: Props) {
       }}
     >
       <Row css={{ width: '100%', gap: '$5'}}>
-        <PostPatient />
-        {patients && (
-          <Button auto icon={<RotateCw size={20}/>} onClick={() => getPatients()}/>
+        <PostDoctor />
+        {doctors && (
+          <Button auto icon={<RotateCw size={20}
+            onClick={() => getDoctors()}
+          />}/>
         )}
       </Row>
-      {loadingPatients ? (
+      {loadingDoctors ? (
         <Loading size="xl"
           css={{
             position: "absolute",
@@ -55,7 +56,7 @@ export default function Patients({}: Props) {
         >
           Error al cargar los pacientes...
         </Text>
-      ) : patients &&
+      ) : doctors &&
       (<>
           <Table
             color="secondary"
@@ -70,20 +71,22 @@ export default function Patients({}: Props) {
               <Table.Column>Nombre</Table.Column>
               <Table.Column>Apellido</Table.Column>
               <Table.Column>Cédula</Table.Column>
-              <Table.Column>Edad</Table.Column>
+              <Table.Column>Especialidad</Table.Column>
+              <Table.Column>Oficina</Table.Column>
               <Table.Column>Correo electrónico</Table.Column>
               <Table.Column>Télefono</Table.Column>
               <Table.Column>Acciones</Table.Column>
             </Table.Header>
             <Table.Body>
-              {patients.map((patient, index) => (
+              {doctors.map((doctor, index) => (
                 <Table.Row key={`patient${index}`}>
-                  <Table.Cell>{patient?.name}</Table.Cell>
-                  <Table.Cell>{patient?.lastname}</Table.Cell>
-                  <Table.Cell>{patient?.cedula}</Table.Cell>
-                  <Table.Cell>{patient?.age}</Table.Cell>
-                  <Table.Cell>{patient?.email}</Table.Cell>
-                  <Table.Cell>{patient?.phone}</Table.Cell>
+                  <Table.Cell>{doctor?.name}</Table.Cell>
+                  <Table.Cell>{doctor?.lastname}</Table.Cell>
+                  <Table.Cell>{doctor?.cedula}</Table.Cell>
+                  <Table.Cell>{doctor?.speciality}</Table.Cell>
+                  <Table.Cell>{doctor?.office}</Table.Cell>
+                  <Table.Cell>{doctor?.email}</Table.Cell>
+                  <Table.Cell>{doctor?.phone}</Table.Cell>
                   <Table.Cell 
                     css={{
                       display: "flex",
@@ -96,7 +99,7 @@ export default function Patients({}: Props) {
                         <Button auto flat icon={<MoreHorizontal />}/>
                       </Popover.Trigger>
                       <Popover.Content css={{ zIndex: "200 !important" }}>
-                        <PostAppointment patient={patient}/>
+                        <Button>Ver más</Button>
                       </Popover.Content>
                     </Popover>
                   </Table.Cell>

@@ -35,7 +35,16 @@ const validatePostDoctor = [
     .isString().withMessage('Office must be a string'),
   check('email')
     .exists().withMessage('Email is required')
-    .isEmail().withMessage('Email must be a valid email'),
+    .isEmail().withMessage('Email must be a valid email')
+    .custom(async (value) => {
+      /**
+       * Check if email is already in use
+       */
+      const patient = await DoctorModel.findOne({ email: value })
+      if (patient) {
+        throw new Error('Email already in use')
+      }
+    }),
   check('phone')
     .exists().withMessage('Phone is required')
     .isNumeric().withMessage('Phone must be a number')

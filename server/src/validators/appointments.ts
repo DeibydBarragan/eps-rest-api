@@ -28,10 +28,6 @@ const validatePostAppointment = [
       const doctor = await getDoctorById(value)
       if (!doctor) return Promise.reject('Doctor does not exist')
     }),
-  check('speciality')
-    .exists().withMessage('Speciality is required')
-    .isString().withMessage('Speciality must be a string')
-    .isIn(specialities).withMessage(`Speciality must be one of these values: ${specialities.join(', ')}`),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next)
   }

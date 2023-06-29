@@ -9,7 +9,7 @@ type Props = {
 
 export default function Nav({setSection, section}: Props) {
   return (
-    <Navbar isBordered variant="sticky">
+    <Navbar isBordered variant="sticky" css={{zIndex: "1000 !important"}}>
       <Navbar.Toggle aria-label="toggle navigation"
         css={{
           '@xs': {
@@ -21,7 +21,7 @@ export default function Nav({setSection, section}: Props) {
         {links.map((link, index) => (
           <Navbar.Link 
             key={`link${index}`}
-            onPress={() => setSection(link.id)}
+            onClick={() => setSection(link.id)}
             isActive={section === link.id}
           >
             {link.name}
@@ -33,7 +33,7 @@ export default function Nav({setSection, section}: Props) {
           <Navbar.CollapseItem key={index}>
             <Link
               color='inherit'
-              onPress={() => setSection(link.id)}
+              onClick={() => setSection(link.id)}
             >
               {link.name}
             </Link>

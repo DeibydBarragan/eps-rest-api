@@ -1,6 +1,6 @@
 import { Button, Input, Loading, Modal, Text, useModal, Popover } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { postPatientSchema } from '../schemas/patients/postPatientSchema'
+import { postDoctorSchema } from '../schemas/doctors/postDoctorSchema'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputPopover from '@/components/common/inputPopover/inputPopover'
@@ -10,7 +10,7 @@ import { UserPlus } from 'lucide-react';
 
 type Props = {}
 
-export default function PostPatient({}: Props) {
+export default function PostDoctor({}: Props) {
   // Modal state
   const { visible, setVisible } = useModal()
 
@@ -22,8 +22,8 @@ export default function PostPatient({}: Props) {
   const closeHandler = () => setVisible(false)
   
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
-    resolver: yupResolver(postPatientSchema),
+  const { register, formState: { errors }, handleSubmit, reset, clearErrors } = useForm({
+    resolver: yupResolver(postDoctorSchema),
   })
   
   // Reset the form when the modal is closed
@@ -33,14 +33,13 @@ export default function PostPatient({}: Props) {
   
   // Submit the form
   const onSubmit = async (formData: any) => { 
-    console.log('submit')
     try {
       setIsLoading(true)
-      const response = await insertItem('patients', formData)
-      toast.success('Paciente añadido correctamente')
+      const response = await insertItem('doctors', formData)
+      toast.success('Doctor añadido correctamente')
       reset()
     } catch (err) {
-      let msg = 'Hubo un error al guardar el paciente'
+      let msg = 'Hubo un error al guardar el doctor'
       if (err instanceof Error) {
         if(err.message === 'Cedula already in use') msg = 'La cédula ya está en uso'
         if(err.message === 'Email already in use') msg = 'El email ya está en uso'
@@ -54,7 +53,7 @@ export default function PostPatient({}: Props) {
   return (
     <>
       <Button onPress={handler}>
-        Añadir paciente
+        Añadir doctor
       </Button>
       <Modal
         closeButton
@@ -67,7 +66,7 @@ export default function PostPatient({}: Props) {
       >
         <Modal.Header>
           <Text id="modal-title" h4>
-            Añadir paciente
+            Añadir doctor
           </Text>
         </Modal.Header>
         <Modal.Body>
@@ -115,16 +114,29 @@ export default function PostPatient({}: Props) {
             />
           </InputPopover>
           
-          {/**Age */}
-          <InputPopover error={errors.age}>
+          {/**Speciality */}
+          <InputPopover error={errors.speciality}>
             <Input
               bordered
               fullWidth
               color="secondary"
-              labelLeft="Edad"
-              aria-label='Edad'
-              type='number'
-              {...register('age')}
+              labelLeft="Especialidad"
+              aria-label='Especialidad'
+              type='text'
+              {...register('speciality')}
+            />
+          </InputPopover>
+
+          {/**Office */}
+          <InputPopover error={errors.office}>
+            <Input
+              bordered
+              fullWidth
+              color="secondary"
+              labelLeft="Oficina"
+              aria-label='Oficina'
+              type='text'
+              {...register('office')}
             />
           </InputPopover>
 
@@ -175,7 +187,7 @@ export default function PostPatient({}: Props) {
             }
             disabled={isLoading}
           >
-            Añadir paciente
+            Añadir doctor
           </Button>
         </Modal.Footer>
       </Modal>

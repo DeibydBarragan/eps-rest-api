@@ -1,5 +1,4 @@
 import Layout from '@/components/container/layout/Layout'
-import Patients from '@/components/container/sections/patients/Patients'
 import Head from 'next/head'
 
 export default function Home() {
