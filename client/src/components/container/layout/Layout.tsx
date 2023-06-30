@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Patients from '../sections/patients/Patients'
 import Nav from '@/components/nav/Nav'
 import Doctors from '../sections/doctors/Doctors'
+import Appointments from '../sections/appointments/Appointments'
 
 export default function Layout() {
   const [section, setSection] = useState("appointments")
@@ -21,7 +22,7 @@ export default function Layout() {
         }}
       >
         {section === "patients" && (<Patients />)} 
-        {section === "appointments" && (<h1>Appointments</h1>)}
+        {section === "appointments" && (<Appointments />)}
         {section === "doctors" && (<Doctors />)}     
       </Row>
     </>

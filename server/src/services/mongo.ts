@@ -12,6 +12,7 @@ const connectToMongo = () => {
   })
   .catch((error) => {
     console.log("Error connecting to MongoDB:", error.message)
+    throw new Error("Error conecting to MongoDB")
   })
 }
 

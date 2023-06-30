@@ -2,7 +2,7 @@ import { Appointment, Doctor, Patient } from "@/interfaces/interfaces"
 import { Endpoint } from "./types"
 
 export const insertItem = async (endpoint: Endpoint, item: Patient | Doctor | Appointment) => {
-    const res = await fetch(`http://localhost:3002/api/${endpoint}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

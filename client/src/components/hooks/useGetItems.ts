@@ -32,6 +32,7 @@ const useGetItems = (endpoint: string, limit: number = 7, page: number = 1): Use
     })
     .catch((error) => {
       setError(error)
+      console.log(error)
     })
     .finally(() => setLoadingItems(false))
   }, [endpoint, limit, actualPage])

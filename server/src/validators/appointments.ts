@@ -1,14 +1,12 @@
 import { check } from "express-validator"
 import validateResult from "../utils/validate.handle"
 import { NextFunction, Request, Response } from "express"
-import { specialities } from "../constants/constants"
 import { getDoctorById } from "../services/doctor"
 import { getPatientById } from "../services/patient"
 
 const validatePostAppointment = [
   check('patientId')
     .exists().withMessage('PatientId is required')
-    .isString().withMessage('PatientId must be a string')
     .isMongoId().withMessage('PatientId must be a valid MongoId')
     .custom(async (value) => {
       /**
@@ -19,7 +17,6 @@ const validatePostAppointment = [
     }),
   check('doctorId')
     .exists().withMessage('DoctorId is required')
-    .isString().withMessage('DoctorId must be a string')
     .isMongoId().withMessage('DoctorId must be a valid MongoId')
     .custom(async (value) => {
       /**

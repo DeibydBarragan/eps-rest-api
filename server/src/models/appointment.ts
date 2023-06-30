@@ -4,10 +4,8 @@ import paginate from 'mongoose-paginate-v2';
 
 const AppointmentSchema = new Schema<Appointment>(
   {
-    patientId: { type: SchemaTypes.ObjectId, required: true },
-    doctorId: { type: SchemaTypes.ObjectId, required: true },
-    speciality: { type: String, required: true },
-    office: { type: String, required: true },
+    patient: { type: Object, required: true },
+    doctor: { type: Object, required: true },
   },
   {
     timestamps: true,

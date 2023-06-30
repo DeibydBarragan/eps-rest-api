@@ -1,5 +1,5 @@
 export interface Patient  {
-  _id: number
+  _id: string
   name: string
   lastname: string
   cedula: number
@@ -13,19 +13,18 @@ export interface Doctor {
   name: string
   lastname: string
   cedula: number
-  speciality: 'Medicina general' | 'Cardiología' | 'Medicina interna' | 'Dermatología' | 'Rehabilitación física' | 'Psicología' | 'Odontología' | 'Radiología'
+  speciality: Speciality
   office: string
   email: string
   phone: number
 }
 
 export interface Appointment {
-  _id: string
   patientId: string
   doctorId: string
-  speciality: 'Medicina general' | 'Cardiología' | 'Medicina interna' | 'Dermatología' | 'Rehabilitación física' | 'Psicología' | 'Odontología' | 'Radiología'
-  office: string
 }
+
+export type Speciality = 'Medicina general' | 'Cardiología' | 'Medicina interna' | 'Dermatología' | 'Rehabilitación física' | 'Psicología' | 'Odontología' | 'Radiología'
 
 export interface Pagination {
   totalDocs: number
