@@ -6,7 +6,15 @@ const insertAppointment = async (appointment: Appointment) => {
 }
 
 const getAppointments = async (limit:string = '10', page:string = '1') => {
-  return await AppointmentModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
+  return await AppointmentModel.paginate({}, { limit: parseInt(limit), page: parseInt(page), populate: ['patient', 'doctor'] })
 }
 
-export { insertAppointment, getAppointments }
+const getAppointmentsByPatientId = async (id: string, limit:string = '10', page:string = '1') => {
+  return await AppointmentModel.paginate({ patient: id }, { limit: parseInt(limit), page: parseInt(page), populate: ['patient', 'doctor'] })
+} 
+
+const getAppointmentsByDoctorId = async (id: string, limit:string = '10', page:string = '1') => {
+  return await AppointmentModel.paginate({ doctor: id }, { limit: parseInt(limit), page: parseInt(page), populate: ['patient', 'doctor'] })
+} 
+
+export { insertAppointment, getAppointments, getAppointmentsByPatientId, getAppointmentsByDoctorId }

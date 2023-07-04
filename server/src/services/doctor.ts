@@ -23,4 +23,8 @@ const getDoctorById = async (id: string) => {
   return await DoctorModel.findById(id)
 }
 
-export { insertDoctor, paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, getDoctorById }
+const getDoctorByCedula = async (cedula: number) => {
+  return await DoctorModel.findOne({ cedula })
+}
+
+export { insertDoctor, paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, getDoctorById, getDoctorByCedula }

@@ -28,6 +28,6 @@ interface PatientDocument extends mongoose.Document, Patient {}
 const PatientModel = mongoose.model<
   PatientDocument,
   mongoose.PaginateModel<PatientDocument>
->('patient', PatientSchema, 'patients');
+>('Patient', PatientSchema, 'patients');
 
 export default PatientModel

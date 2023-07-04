@@ -75,8 +75,8 @@ export default function Appointments({}: Props) {
                 <Table.Row key={`appointment${index}`}>
                   <Table.Cell>{appointment?.patient?.cedula}</Table.Cell>
                   <Table.Cell>{appointment?.doctor?.cedula}</Table.Cell>
-                  <Table.Cell>{appointment?.doctor?.office}</Table.Cell>
-                  <Table.Cell>{appointment?.doctor?.speciality}</Table.Cell>
+                  <Table.Cell>{appointment?.office}</Table.Cell>
+                  <Table.Cell>{appointment?.speciality}</Table.Cell>
                   <Table.Cell 
                     css={{
                       display: "flex",

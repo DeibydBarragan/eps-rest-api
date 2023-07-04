@@ -6,7 +6,7 @@ import appointmentRoutes from "./routes/appointment.route"
 import doctorRoutes from "./routes/doctor.route"
 import connectToMongo from "./services/mongo"
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8000
 
 const app = express()
 
