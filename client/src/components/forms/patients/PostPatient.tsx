@@ -33,7 +33,6 @@ export default function PostPatient({}: Props) {
   
   // Submit the form
   const onSubmit = async (formData: any) => { 
-    console.log('submit')
     try {
       setIsLoading(true)
       const response = await insertItem('patients', formData)
@@ -179,8 +178,6 @@ export default function PostPatient({}: Props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      
-      {/**Toastify container */}
     </>
   )
 }

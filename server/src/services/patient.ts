@@ -6,7 +6,7 @@ const insertPatient = async (patient: Patient) => {
 }
 
 const getPatients = async (limit:string = '10', page:string = '1') => {
-  return await PatientModel.paginate({}, { limit: parseInt(limit), page: parseInt(page) })
+  return await PatientModel.paginate({ deleted_at: null }, { limit: parseInt(limit), page: parseInt(page) })
 }
 
 const getPatientById = async (id: string) => {
@@ -14,7 +14,16 @@ const getPatientById = async (id: string) => {
 }
 
 const getPatientByCedula = async (cedula: number) => {
-  return await PatientModel.findOne({ cedula })
+  return await PatientModel.findOne({ cedula, deleted_at: null })
 }
 
-export { insertPatient, getPatients, getPatientById, getPatientByCedula }
+const destroyPatient = async (id: string) => {
+  return await PatientModel.findByIdAndUpdate(id, { deleted_at: new Date() })
+}
+
+export { insertPatient, 
+  getPatients, 
+  getPatientById, 
+  getPatientByCedula,
+  destroyPatient
+}

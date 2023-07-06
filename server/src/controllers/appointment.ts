@@ -1,16 +1,28 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { getAppointmentsByPatientId, getAppointments, insertAppointment, getAppointmentsByDoctorId } from "../services/appointment"
+import { getAppointmentsByPatientId, getAppointments, insertAppointment, getAppointmentsByDoctorId, destroyAppointment } from "../services/appointment"
 import { getDoctorByCedula, getDoctorById } from "../services/doctor"
 import { getPatientByCedula, getPatientById } from "../services/patient"
+import { specialities } from "../constants/constants"
 
 const listAppointments = async (req: Request, res: Response) => {
   try {
-    const { limit, page } = req.query
-    const response = await getAppointments(limit?.toString(), page?.toString())
+    const { speciality, limit, page } = req.query
+    const specialityValue = specialities[parseInt(speciality as string)]
+    const response = await getAppointments(limit?.toString(), page?.toString(), specialityValue)
     res.send(response)
   } catch (error) {
     handleHttp(res, 'ERROR_GETTING_APPOINTMENTS', error)
+  }
+}
+
+const deleteAppointment = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const response = await destroyAppointment(id)
+    res.send(response)
+  } catch (error) {
+    handleHttp(res, 'ERROR_DELETING_APPOINTMENT', error)
   }
 }
 
@@ -70,4 +82,9 @@ const postAppointment = async (req: Request, res: Response) => {
   }
 }
 
-export { listAppointments, postAppointment, searchAppointmentsByPatientCedula, searchAppointmentsByDoctorCedula }
+export { listAppointments, 
+  postAppointment, 
+  searchAppointmentsByPatientCedula, 
+  searchAppointmentsByDoctorCedula,
+  deleteAppointment
+}

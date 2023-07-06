@@ -1,6 +1,7 @@
-import { Request, Response, Router } from "express"
-import { listAppointments, postAppointment, searchAppointmentsByDoctorCedula, searchAppointmentsByPatientCedula } from "../controllers/appointment"
-import { validatePostAppointment } from "../validators/appointments"
+import { Router } from "express"
+import { deleteAppointment, listAppointments, postAppointment, searchAppointmentsByDoctorCedula, searchAppointmentsByPatientCedula } from "../controllers/appointment"
+import { validatePostAppointment } from "../validators/appointments/postAppointment"
+import { validateDeleteAppointment } from "../validators/appointments/deleteAppointment"
 
 const appointmentRoutes = Router()
 
@@ -30,5 +31,11 @@ appointmentRoutes.get("/api/appointments/doctor/:cedula", searchAppointmentsByDo
  * Create a appointment
  */
 appointmentRoutes.post("/api/appointments", validatePostAppointment, postAppointment)
+
+/**
+ * [DELETE]
+ * Create a appointment
+ */
+appointmentRoutes.delete("/api/appointments/:id", validateDeleteAppointment, deleteAppointment)
 
 export default appointmentRoutes

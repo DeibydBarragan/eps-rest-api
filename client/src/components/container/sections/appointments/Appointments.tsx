@@ -1,13 +1,18 @@
 import useGetItems from '@/components/hooks/useGetItems'
 import { Container, Loading, Row, Table, Text, Popover, Pagination, Button } from '@nextui-org/react'
-import React from 'react'
+import FilterAppointments from '@/components/forms/appointments/FilterAppointments'
+import SearchAppointments from '@/components/forms/appointments/SearchAppointments'
+import { useState } from 'react'
+import DeleteItem from '@/components/common/deleteItem/DeleteItem'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
 
 type Props = {}
 
 export default function Appointments({}: Props) {
+  const [ endpoint, setEndpoint ] = useState<string>('appointments?')
+
   // Pagination
-  const [ appointments, loadingAppointments, pagination, actualPage, setActualPage, getAppointments, error ] = useGetItems('appointments')
+  const [ appointments, loadingAppointments, pagination, actualPage, setActualPage, getAppointments, error ] = useGetItems(endpoint)
 
   return (
     <Container
@@ -28,9 +33,12 @@ export default function Appointments({}: Props) {
       }}
     >
       <Row css={{ width: '100%', gap: '$5'}}>
-        {appointments && (
-          <Button auto icon={<RotateCw size={20}/>} onClick={() => getAppointments()}/>
-        )}
+        <FilterAppointments setEndpoint={setEndpoint} loading={loadingAppointments} />
+        <SearchAppointments setEndpoint={setEndpoint} loading={loadingAppointments}/>
+        <Button auto icon={<RotateCw size={20}/>} onClick={() => {
+          if (endpoint !== 'appointments') setEndpoint('appointments?')
+          else getAppointments()
+        }}/>
       </Row>
       {loadingAppointments ? (
         <Loading size="xl"
@@ -50,7 +58,11 @@ export default function Appointments({}: Props) {
             transform: "translate(-50%, -50%)",
           }}
         >
-          Error al cargar las citas...
+          {
+            error === 'PATIENT_NOT_FOUND' ? 'Paciente no encontrado' :
+            error === 'DOCTOR_NOT_FOUND' ? 'Doctor no encontrado' :
+            'Error al cargar las citas'
+          }
         </Text>
       ) : appointments &&
       (<>
@@ -88,8 +100,14 @@ export default function Appointments({}: Props) {
                       <Popover.Trigger>
                         <Button auto flat icon={<MoreHorizontal />}/>
                       </Popover.Trigger>
-                      <Popover.Content css={{ zIndex: "200 !important" }}>
-                        <Button>Eliminar</Button>
+                      <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
+                        <Row css={{gap: '$4', flexDirection: 'column'}}>
+                          <DeleteItem
+                            endpoint={`appointments/${appointment._id}`} 
+                            name='cita'
+                            reload={getAppointments}
+                          />
+                        </Row>
                       </Popover.Content>
                     </Popover>
                   </Table.Cell>

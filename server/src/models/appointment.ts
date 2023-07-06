@@ -8,6 +8,7 @@ const AppointmentSchema = new Schema<Appointment>(
     doctor: { type: SchemaTypes.ObjectId, required: true, ref: 'Doctor' },
     speciality: { type: String, required: true },
     office: { type: String, required: true },
+    deleted_at: { type: Date, default: null },
   },
   {
     timestamps: true,

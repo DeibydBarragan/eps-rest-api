@@ -2,7 +2,7 @@ import { Button, Input, Loading, Modal, Text, useModal, Popover, Row,  } from '@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Doctor, Patient, Speciality } from '@/interfaces/interfaces'
-import { UserPlus, ChevronDown } from 'lucide-react'
+import { UserPlus, ChevronDown, FolderPlus } from 'lucide-react'
 import { specialities } from '@/constants/constants'
 import { insertItem } from '@/api/InsertItem'
 import { getItemsBy } from '@/api/getItemsBy'
@@ -71,9 +71,7 @@ export default function PostAppointment({patient}: Props) {
         doctorId: doctor._id,
       })
       toast.success('Cita añadida correctamente')
-      console.log(response)
     } catch (err) {
-      console.log(err)
       let msg = 'Hubo un error al guardar la cita'
       if (err instanceof Error) {
         if(err.message === 'Patient does not exist') msg = 'El paciente no existe'
@@ -87,7 +85,10 @@ export default function PostAppointment({patient}: Props) {
 
   return (
       <>
-        <Button onPress={handler}>
+        <Button
+          onPress={handler}
+          iconRight={<FolderPlus size={20} />}  
+        >
           Agendar cita
         </Button>
         <Modal
@@ -140,6 +141,7 @@ export default function PostAppointment({patient}: Props) {
             {/**Specialities */}
             <Popover shouldFlip={false} placement='bottom-right'>
               <Popover.Trigger>
+                
                 <Button flat color="secondary" iconRight={<ChevronDown size={25}/>}>
                     {speciality ? speciality : 'Seleccionar especialidad'}
                 </Button>
@@ -196,7 +198,7 @@ export default function PostAppointment({patient}: Props) {
               color='secondary'
               iconRight={
                 isLoading ? <Loading color='secondary' type='points' size='sm'/>
-                : <UserPlus size={20}/>
+                : <FolderPlus size={20}/>
               }
               disabled={isLoading || disabled}
               onClick={onSubmit}

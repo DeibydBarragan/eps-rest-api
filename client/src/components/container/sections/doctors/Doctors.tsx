@@ -3,12 +3,13 @@ import { Container, Loading, Row, Table, Text, Popover, Pagination, Button } fro
 import React from 'react'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
 import PostDoctor from '@/components/forms/doctors/PostDoctor'
+import DeleteItem from '@/components/common/deleteItem/DeleteItem'
 
 type Props = {}
 
 export default function Doctors({}: Props) {
   // Pagination
-  const [ doctors, loadingDoctors, pagination, actualPage, setActualPage, getDoctors, error ] = useGetItems('doctors')
+  const [ doctors, loadingDoctors, pagination, actualPage, setActualPage, getDoctors, error ] = useGetItems('doctors?')
 
   return (
     <Container
@@ -98,8 +99,14 @@ export default function Doctors({}: Props) {
                       <Popover.Trigger>
                         <Button auto flat icon={<MoreHorizontal />}/>
                       </Popover.Trigger>
-                      <Popover.Content css={{ zIndex: "200 !important" }}>
-                        <Button>Ver más</Button>
+                      <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
+                        <Row css={{gap: '$4', flexDirection: 'column'}}>
+                          <DeleteItem
+                            endpoint={`doctors/${doctor._id}`} 
+                            name='doctor'
+                            reload={getDoctors}
+                          />
+                        </Row>
                       </Popover.Content>
                     </Popover>
                   </Table.Cell>

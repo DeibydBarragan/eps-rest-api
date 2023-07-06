@@ -11,6 +11,7 @@ const PatientSchema = new Schema<Patient>(
     age: { type: Number, required: true },
     email: { type: String, required: true },
     phone: { type: Number, required: true },
+    deleted_at: { type: Date, default: null },
   },
   {
     timestamps: true,

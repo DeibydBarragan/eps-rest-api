@@ -1,4 +1,4 @@
-import { Button, Input, Loading, Modal, Text, useModal, Popover } from '@nextui-org/react'
+import { Button, Input, Loading, Modal, Text, useModal, Popover, Row } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { postDoctorSchema } from '../schemas/doctors/postDoctorSchema'
 import { useForm } from 'react-hook-form'
@@ -6,7 +6,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputPopover from '@/components/common/inputPopover/inputPopover'
 import { insertItem } from '@/api/InsertItem'
 import { toast } from 'react-toastify'
-import { UserPlus } from 'lucide-react';
+import { UserPlus, ChevronDown } from 'lucide-react'
+import { Speciality } from '@/interfaces/interfaces'
+import { specialities } from '@/constants/constants'
 
 type Props = {}
 
@@ -21,14 +23,18 @@ export default function PostDoctor({}: Props) {
   const handler = () => setVisible(true)
   const closeHandler = () => setVisible(false)
   
+  // Speciality form state
+  const [speciality, setSpeciality] = useState<Speciality | null>(null)
+
   // Form validation
-  const { register, formState: { errors }, handleSubmit, reset, clearErrors } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setError, setValue } = useForm({
     resolver: yupResolver(postDoctorSchema),
   })
   
   // Reset the form when the modal is closed
   useEffect(() => {
     reset()
+    setSpeciality(null)
   }, [visible, reset])
   
   // Submit the form
@@ -38,6 +44,7 @@ export default function PostDoctor({}: Props) {
       const response = await insertItem('doctors', formData)
       toast.success('Doctor añadido correctamente')
       reset()
+      setSpeciality(null)
     } catch (err) {
       let msg = 'Hubo un error al guardar el doctor'
       if (err instanceof Error) {
@@ -89,16 +96,16 @@ export default function PostDoctor({}: Props) {
           
           {/**Lastname */}
           <InputPopover error={errors.lastname}>
-              <Input
-                clearable
-                bordered
-                fullWidth
-                color="secondary"
-                labelLeft="Apellido"
-                aria-label='Apellido'
-                type='text'
-                {...register('lastname')}
-              />
+            <Input
+              clearable
+              bordered
+              fullWidth
+              color="secondary"
+              labelLeft="Apellido"
+              aria-label='Apellido'
+              type='text'
+              {...register('lastname')}
+            />
           </InputPopover>
 
           {/**Cedula */}
@@ -114,18 +121,33 @@ export default function PostDoctor({}: Props) {
             />
           </InputPopover>
           
-          {/**Speciality */}
+          {/**Specialities */}
           <InputPopover error={errors.speciality}>
-            <Input
-              bordered
-              fullWidth
-              color="secondary"
-              labelLeft="Especialidad"
-              aria-label='Especialidad'
-              type='text'
-              {...register('speciality')}
-            />
-          </InputPopover>
+            <Popover shouldFlip={false} placement='bottom-right'>
+                <Popover.Trigger>
+                  <Button css={{ width: "100%" }} flat color="secondary" iconRight={<ChevronDown size={25}/>}>
+                      {speciality ? speciality : 'Seleccionar especialidad'}
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Content css={{p: '$4'}}>
+                  <Row css={{gap: '$4', flexDirection: 'column'}}>
+                    {specialities.map((speciality) => (
+                      <Button
+                        key={speciality}
+                        flat
+                        size='md'
+                        onClick={() => {
+                          setSpeciality(speciality)
+                          setValue('speciality', speciality)
+                        }}
+                      >
+                        {speciality}
+                      </Button>
+                    ))}
+                  </Row>
+                </Popover.Content>
+              </Popover>
+            </InputPopover>
 
           {/**Office */}
           <InputPopover error={errors.office}>

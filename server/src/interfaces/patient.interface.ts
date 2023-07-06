@@ -5,4 +5,5 @@ export interface Patient {
   age: number
   email: string
   phone: number
+  deleted_at?: Date
 }

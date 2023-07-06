@@ -6,4 +6,5 @@ export interface Doctor {
   office: string
   email: string
   phone: number
+  deleted_at?: Date
 }

@@ -1,6 +1,7 @@
-import { Request, Response, Router } from "express"
-import { listDoctors, allDoctors, postDoctor } from "../controllers/doctor"
-import { validatePostDoctor } from "../validators/doctors"
+import { Router } from "express"
+import { listDoctors, allDoctors, postDoctor, deleteDoctor } from "../controllers/doctor"
+import { validatePostDoctor } from "../validators/doctors/doctors"
+import { validateDeleteDoctor } from "../validators/doctors/deleteDoctor"
 
 const doctorRoutes = Router()
 
@@ -23,5 +24,11 @@ doctorRoutes.get("/api/allDoctors", allDoctors)
  * Create a doctor
  */
 doctorRoutes.post("/api/doctors", validatePostDoctor, postDoctor)
+
+/**
+ * [DELETE]
+ * Delete a doctor
+ */
+doctorRoutes.delete("/api/doctors/:id", validateDeleteDoctor, deleteDoctor)
 
 export default doctorRoutes

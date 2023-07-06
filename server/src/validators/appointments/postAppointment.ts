@@ -1,8 +1,8 @@
 import { check } from "express-validator"
-import validateResult from "../utils/validate.handle"
+import validateResult from "../../utils/validate.handle"
 import { NextFunction, Request, Response } from "express"
-import { getDoctorById } from "../services/doctor"
-import { getPatientById } from "../services/patient"
+import { getDoctorById } from "../../services/doctor"
+import { getPatientById } from "../../services/patient"
 
 const validatePostAppointment = [
   check('patientId')

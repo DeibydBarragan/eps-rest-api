@@ -15,6 +15,7 @@ const InputPopover = ({ error, children }: Props) => {
       content={error?.message}
       color='error'
       placement='bottomStart'
+      trigger='click'
       css={{
         zIndex: '10000 !important',
       }}

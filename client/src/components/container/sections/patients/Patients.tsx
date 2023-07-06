@@ -1,15 +1,16 @@
 import PostPatient from '@/components/forms/patients/PostPatient'
 import useGetItems from '@/components/hooks/useGetItems'
-import { Container, Loading, Row, Table, Text, Popover, Pagination, Button } from '@nextui-org/react'
+import { Container, Loading, Row, Table, Text, Popover, Pagination, Button, Input } from '@nextui-org/react'
 import React from 'react'
 import PostAppointment from '@/components/forms/appointments/PostAppointment'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
+import DeleteItem from '@/components/common/deleteItem/DeleteItem'
 
 type Props = {}
 
 export default function Patients({}: Props) {
   // Pagination
-  const [ patients, loadingPatients, pagination, actualPage, setActualPage, getPatients, error ] = useGetItems('patients')
+  const [ patients, loadingPatients, pagination, actualPage, setActualPage, getPatients, error ] = useGetItems('patients?')
 
   return (
     <Container
@@ -95,8 +96,15 @@ export default function Patients({}: Props) {
                       <Popover.Trigger>
                         <Button auto flat icon={<MoreHorizontal />}/>
                       </Popover.Trigger>
-                      <Popover.Content css={{ zIndex: "200 !important" }}>
-                        <PostAppointment patient={patient}/>
+                      <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
+                        <Row css={{gap: '$4', flexDirection: 'column'}}>
+                          <PostAppointment patient={patient}/>
+                          <DeleteItem 
+                            endpoint={`patients/${patient._id}`} 
+                            name='paciente'
+                            reload={getPatients}
+                          />
+                        </Row>
                       </Popover.Content>
                     </Popover>
                   </Table.Cell>

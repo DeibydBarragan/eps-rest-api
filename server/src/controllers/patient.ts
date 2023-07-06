@@ -1,7 +1,10 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { insertPatient, getPatients } from "../services/patient"
+import { insertPatient, getPatients, destroyPatient } from "../services/patient"
 
+/**
+ * List and paginate a doctor in the database
+ */
 const listPatients = async (req: Request, res: Response) => {
   try {
     const { limit, page } = req.query
@@ -12,6 +15,9 @@ const listPatients = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Create a doctor in the database
+ */
 const postPatient = async (req: Request, res: Response) => {
   try {
     const response = await insertPatient(req.body)
@@ -21,4 +27,20 @@ const postPatient = async (req: Request, res: Response) => {
   }
 }
 
-export { listPatients, postPatient }
+/**
+ * Delete a patient in the database
+ */
+const deletePatient = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const response = await destroyPatient(id)
+    res.send(response)
+  } catch (error) {
+    handleHttp(res, 'ERROR_DELETING_PATIENT', error)
+  }
+}
+
+export { listPatients, 
+  postPatient,
+  deletePatient
+}

@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { listPatients, postPatient } from "../controllers/patient"
-import { validatePostPatient } from "../validators/patients"
+import { deletePatient, listPatients, postPatient } from "../controllers/patient"
+import { validatePostPatient } from "../validators/patients/patients"
+import { validateDeletePatient } from "../validators/patients/deletePatient"
 
 const patientRoutes = Router()
 
@@ -16,5 +17,11 @@ patientRoutes.get("/api/patients", listPatients)
  * Create a patient
  */
 patientRoutes.post("/api/patients", validatePostPatient, postPatient)
+
+/**
+ * [DELETE]
+ * Delete a patient
+ */
+patientRoutes.delete("/api/patients/:id", validateDeletePatient, deletePatient)
 
 export default patientRoutes

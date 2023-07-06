@@ -1,10 +1,10 @@
 import { check } from "express-validator"
-import validateResult from "../utils/validate.handle"
+import validateResult from "../../utils/validate.handle"
 import { NextFunction, Request, Response } from "express"
-import PatientModel from "../models/patient"
+import DoctorModel from "../../models/doctor"
+import { specialities } from "../../constants/constants"
 
-
-const validatePostPatient = [
+const validatePostDoctor = [
   check('name')
     .exists().withMessage('Name is required')
     .isString().withMessage('Name must be a string')
@@ -21,15 +21,18 @@ const validatePostPatient = [
       /**
        * Check if cedula is already in use
        */
-      const patient = await PatientModel.findOne({ cedula: value })
-      if (patient) {
-        throw new Error('Cedula already in use')
+      const doctor = await DoctorModel.findOne({ cedula: value })
+      if (doctor) {
+        return Promise.reject('Cedula already in use')
       }
     }),
-  check('age')
-    .exists().withMessage('Age is required')
-    .isNumeric().withMessage('Age must be a number')
-    .isLength({ min: 1, max: 3 }).withMessage('Age must be 1 to 3 characters long'),
+  check('speciality')
+    .exists().withMessage('Speciality is required')
+    .isString().withMessage('Speciality must be a string')
+    .isIn(specialities).withMessage(`Speciality must be one of these values: ${specialities.join(', ')}`),
+  check('office')
+    .exists().withMessage('Office is required')
+    .isString().withMessage('Office must be a string'),
   check('email')
     .exists().withMessage('Email is required')
     .isEmail().withMessage('Email must be a valid email')
@@ -37,7 +40,7 @@ const validatePostPatient = [
       /**
        * Check if email is already in use
        */
-      const patient = await PatientModel.findOne({ email: value })
+      const patient = await DoctorModel.findOne({ email: value })
       if (patient) {
         throw new Error('Email already in use')
       }
@@ -51,4 +54,4 @@ const validatePostPatient = [
   }
 ]
 
-export { validatePostPatient }
+export { validatePostDoctor }
