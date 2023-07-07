@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, insertDoctor, destroyDoctor } from "../services/doctor"
+import { paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, insertDoctor, destroyDoctor, updateDoctor } from "../services/doctor"
 import { Speciality } from "../types/types"
 
 
@@ -51,6 +51,19 @@ const postDoctor = async (req: Request, res: Response) => {
 }
 
 /**
+ * Update a doctor in the database
+ */
+const patchDoctor = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const response = await updateDoctor( id, req.body)
+    res.send(response)
+  } catch (error) {
+    handleHttp(res, 'ERROR_UPDATING_DOCTOR', error)
+  }
+}
+
+/**
  * Delete a doctor in the database
  */
 const deleteDoctor = async (req: Request, res: Response) => {
@@ -66,5 +79,6 @@ const deleteDoctor = async (req: Request, res: Response) => {
 export { listDoctors, 
   allDoctors, 
   postDoctor,
+  patchDoctor,
   deleteDoctor
 }

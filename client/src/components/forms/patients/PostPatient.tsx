@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputPopover from '@/components/common/inputPopover/inputPopover'
 import { insertItem } from '@/api/InsertItem'
 import { toast } from 'react-toastify'
-import { UserPlus } from 'lucide-react';
+import { UserPlus, UserPlus2 } from 'lucide-react';
 
 type Props = {}
 
@@ -52,7 +52,7 @@ export default function PostPatient({}: Props) {
 
   return (
     <>
-      <Button onPress={handler}>
+      <Button onPress={handler} iconRight={<UserPlus2 size={23}/>}>
         Añadir paciente
       </Button>
       <Modal

@@ -11,6 +11,9 @@ export const insertItem = async (endpoint: Endpoint, item: Patient | Doctor | Ap
     })
     const data = await res.json()
 
+    console.log(res)
+    console.log(data)
+
     if (!res.ok) {
       if (res.status === 422) {
         throw new Error(data.errors[0].msg)

@@ -4,6 +4,7 @@ import React from 'react'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
 import PostDoctor from '@/components/forms/doctors/PostDoctor'
 import DeleteItem from '@/components/common/deleteItem/DeleteItem'
+import PatchDoctor from '@/components/forms/doctors/PatchDoctor'
 
 type Props = {}
 
@@ -101,6 +102,7 @@ export default function Doctors({}: Props) {
                       </Popover.Trigger>
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
+                          <PatchDoctor doctor={doctor} reload={getDoctors} />
                           <DeleteItem
                             endpoint={`doctors/${doctor._id}`} 
                             name='doctor'

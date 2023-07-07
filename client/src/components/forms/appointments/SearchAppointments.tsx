@@ -1,5 +1,5 @@
 import { Row, Input, Popover, Button, Loading } from '@nextui-org/react'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Search, ChevronDown } from 'lucide-react'
@@ -7,8 +7,8 @@ import { searchAppointmentsSchema } from '../schemas/appointments/searchAppointm
 import InputPopover from '@/components/common/inputPopover/inputPopover'
 
 type Props = {
-  setEndpoint: any
-  loading: any
+  setEndpoint: Dispatch<SetStateAction<string>>
+  loading: boolean
 }
 
 export default function SearchAppointments({setEndpoint, loading}: Props) {

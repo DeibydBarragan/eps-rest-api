@@ -8,7 +8,7 @@ const DoctorSchema = new Schema<Doctor>(
     lastname: { type: String, required: true },
     cedula: { type: Number, required: true },
     speciality: { type: String, required: true },
-    office: { type: String, required: true },
+    office: { type: Number, required: true },
     email: { type: String, required: true },
     phone: { type: Number, required: true },
     deleted_at: { type: Date, default: null },

@@ -1,11 +1,11 @@
-import { useEffect, useState} from 'react'
+import { Dispatch, SetStateAction, useEffect, useState} from 'react'
 import { Popover, Button, Row } from '@nextui-org/react'
 import { ChevronDown } from 'lucide-react'
 import { Speciality } from '@/interfaces/interfaces'
 import { specialities } from '@/constants/constants'
 
 type Props = {
-  setEndpoint: any
+  setEndpoint: Dispatch<SetStateAction<string>>
   loading: boolean
 }
 

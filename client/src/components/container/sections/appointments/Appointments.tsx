@@ -36,7 +36,7 @@ export default function Appointments({}: Props) {
         <FilterAppointments setEndpoint={setEndpoint} loading={loadingAppointments} />
         <SearchAppointments setEndpoint={setEndpoint} loading={loadingAppointments}/>
         <Button auto icon={<RotateCw size={20}/>} onClick={() => {
-          if (endpoint !== 'appointments') setEndpoint('appointments?')
+          if (endpoint !== 'appointments?') setEndpoint('appointments?')
           else getAppointments()
         }}/>
       </Row>

@@ -13,7 +13,7 @@ const validatePostAppointment = [
        * Check if patient exists
        */
       const patient = await getPatientById(value)
-      if (!patient) return Promise.reject('Patient does not exist')
+      if (!patient) throw new Error('Patient does not exist')
     }),
   check('doctorId')
     .exists().withMessage('DoctorId is required')
@@ -23,7 +23,7 @@ const validatePostAppointment = [
        * Check if doctor exists
        */
       const doctor = await getDoctorById(value)
-      if (!doctor) return Promise.reject('Doctor does not exist')
+      if (!doctor) throw new Error('Doctor does not exist')
     }),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next)

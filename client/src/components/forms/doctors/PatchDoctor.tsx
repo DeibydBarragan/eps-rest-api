@@ -1,18 +1,22 @@
 import { Button, Input, Loading, Modal, Text, useModal, Popover, Row } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { postDoctorSchema } from '../schemas/doctors/postDoctorSchema'
+import { patchDoctorSchema } from '../schemas/doctors/patchDoctorSchema'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputPopover from '@/components/common/inputPopover/inputPopover'
-import { insertItem } from '@/api/InsertItem'
 import { toast } from 'react-toastify'
-import { UserPlus, ChevronDown, UserPlus2 } from 'lucide-react'
-import { Speciality } from '@/interfaces/interfaces'
+import { Pencil, ChevronDown } from 'lucide-react'
+import { Doctor, Speciality } from '@/interfaces/interfaces'
 import { specialities } from '@/constants/constants'
+import { patchItem } from '@/api/patchItem'
+import { filterPropertiesWithValues, isEmptyObject } from '@/utils/utils'
 
-type Props = {}
+type Props = {
+  doctor: Doctor
+  reload: () => void
+}
 
-export default function PostDoctor({}: Props) {
+export default function PatchDoctor({ doctor, reload }: Props) {
   // Modal state
   const { visible, setVisible } = useModal()
 
@@ -24,34 +28,41 @@ export default function PostDoctor({}: Props) {
   const closeHandler = () => setVisible(false)
   
   // Speciality form state
-  const [speciality, setSpeciality] = useState<Speciality | null>(null)
+  const [speciality, setSpeciality] = useState<Speciality | undefined | null>(doctor?.speciality)
 
   // Form validation
   const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm({
-    resolver: yupResolver(postDoctorSchema),
+    resolver: yupResolver(patchDoctorSchema),
   })
   
   // Reset the form when the modal is closed
   useEffect(() => {
     reset()
-    setSpeciality(null)
-  }, [visible, reset])
+    setSpeciality(doctor?.speciality)
+  }, [reset, setSpeciality, doctor?.speciality])
   
   // Submit the form
   const onSubmit = async (formData: any) => { 
+    const data = filterPropertiesWithValues(formData)
+    
+    if (isEmptyObject(data)) {
+      toast.warning('Debe diligenciar algún campo')
+      return
+    }
+
     try {
       setIsLoading(true)
-      const response = await insertItem('doctors', formData)
-      toast.success('Doctor añadido correctamente')
-      reset()
-      setSpeciality(null)
-    } catch (err) {
-      let msg = 'Hubo un error al guardar el doctor'
+      await patchItem('doctors', data, doctor._id)
+      toast.success('El doctor fue actualizado correctamente')
+      closeHandler()
+    } catch(err) {
+      let msg = 'Hubo un error al actualizar el doctor'
       if (err instanceof Error) {
-        if(err.message === 'Cedula already in use') msg = 'La cédula ya está en uso'
-        if(err.message === 'Email already in use') msg = 'El email ya está en uso'
+        if (err.message === 'Cedula already in use') msg = 'La cedula ya está en uso por otro doctor'
+        if (err.message === 'Email already in use') msg = 'El email ya está en uso por otro doctor'
       }
       toast.error(msg)
+      console.log(err)
     } finally {
       setIsLoading(false)
     }
@@ -59,8 +70,8 @@ export default function PostDoctor({}: Props) {
 
   return (
     <>
-      <Button onPress={handler} iconRight={<UserPlus2 size={23} />}>
-        Añadir doctor
+      <Button flat onPress={handler} iconRight={<Pencil size={20} />}>
+        Editar doctor
       </Button>
       <Modal
         closeButton
@@ -73,7 +84,7 @@ export default function PostDoctor({}: Props) {
       >
         <Modal.Header>
           <Text id="modal-title" h4>
-            Añadir doctor
+            Editar doctor
           </Text>
         </Modal.Header>
         <Modal.Body>
@@ -89,6 +100,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Nombre"
               aria-label='Nombre'
+              placeholder={doctor?.name}
               type='text'
               {...register('name')}
             />
@@ -103,6 +115,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Apellido"
               aria-label='Apellido'
+              placeholder={doctor?.lastname}
               type='text'
               {...register('lastname')}
             />
@@ -116,6 +129,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Cédula"
               aria-label='Cédula'
+              placeholder={doctor?.cedula.toString()}
               type='number'
               {...register('cedula')}
             />
@@ -157,6 +171,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Consultorio"
               aria-label='Consultorio'
+              placeholder={doctor?.office}
               type='number'
               {...register('office')}
             />
@@ -174,6 +189,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Teléfono"
               aria-label='Teléfono'
+              placeholder={doctor?.phone.toString()}
               type='number'
               {...register('phone')}
             />
@@ -188,6 +204,7 @@ export default function PostDoctor({}: Props) {
               color="secondary"
               labelLeft="Correo electrónico"
               aria-label='Correo electrónico'
+              placeholder={doctor?.email}
               type='text'
               {...register('email')}
             />
@@ -205,11 +222,11 @@ export default function PostDoctor({}: Props) {
             color='secondary'
             iconRight={
               isLoading ? <Loading color='secondary' type='points' size='sm'/>
-              : <UserPlus size={20}/>
+              : <Pencil size={20}/>
             }
             disabled={isLoading}
           >
-            Añadir doctor
+            Editar doctor
           </Button>
         </Modal.Footer>
       </Modal>

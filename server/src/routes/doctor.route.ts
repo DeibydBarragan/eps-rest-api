@@ -1,7 +1,8 @@
 import { Router } from "express"
-import { listDoctors, allDoctors, postDoctor, deleteDoctor } from "../controllers/doctor"
-import { validatePostDoctor } from "../validators/doctors/doctors"
+import { listDoctors, allDoctors, postDoctor, deleteDoctor, patchDoctor } from "../controllers/doctor"
+import { validatePostDoctor } from "../validators/doctors/postDoctors"
 import { validateDeleteDoctor } from "../validators/doctors/deleteDoctor"
+import { validatePatchDoctor } from "../validators/doctors/patchDoctor"
 
 const doctorRoutes = Router()
 
@@ -24,6 +25,12 @@ doctorRoutes.get("/api/allDoctors", allDoctors)
  * Create a doctor
  */
 doctorRoutes.post("/api/doctors", validatePostDoctor, postDoctor)
+
+/**
+ * [PATCH]
+ * Create a doctor
+ */
+doctorRoutes.patch("/api/doctors/:id", validatePatchDoctor, patchDoctor)
 
 /**
  * [DELETE]

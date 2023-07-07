@@ -7,7 +7,7 @@ import { deleteItem } from '@/api/deleteItem'
 type Props = {
   endpoint: string
   name: string
-  reload: any
+  reload: () => void
 }
 
 export default function DeleteItem({endpoint, name, reload}: Props) {

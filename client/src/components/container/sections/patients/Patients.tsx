@@ -5,6 +5,7 @@ import React from 'react'
 import PostAppointment from '@/components/forms/appointments/PostAppointment'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
 import DeleteItem from '@/components/common/deleteItem/DeleteItem'
+import PatchPatient from '@/components/forms/patients/PatchPatient'
 
 type Props = {}
 
@@ -99,6 +100,7 @@ export default function Patients({}: Props) {
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
                           <PostAppointment patient={patient}/>
+                          <PatchPatient patient={patient} reload={getPatients}/>
                           <DeleteItem 
                             endpoint={`patients/${patient._id}`} 
                             name='paciente'

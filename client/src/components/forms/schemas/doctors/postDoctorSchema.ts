@@ -20,8 +20,10 @@ export const postDoctorSchema = yup.object().shape({
     .required('La especialidad es requerida')
     .oneOf(specialities, 'La especialidad no es válida'),
   office: yup
-    .string()
-    .required('La oficina es requerida'),
+    .number()
+    .typeError('El consultorio es requerido')
+    .min(100, 'El consultorio tiene que estar entre 100 y 999')
+    .max(999, 'El consultorio tiene que estar entre 100 y 999'),
   email: yup
     .string()
     .required('El email es requerido')
@@ -30,6 +32,5 @@ export const postDoctorSchema = yup.object().shape({
     .number()
     .typeError('El teléfono es requerido')
     .min(1000000000, 'El teléfono tiene que tener 10 caracteres')
-    .max(9999999999, 'El teléfono tiene que tener 10 caracteres'),
-  
+    .max(9999999999, 'El teléfono tiene que tener 10 caracteres'), 
 })
