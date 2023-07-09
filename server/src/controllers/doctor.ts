@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
 import { paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, insertDoctor, destroyDoctor, updateDoctor } from "../services/doctor"
 import { Speciality } from "../types/types"
+import { specialities } from "../constants/constants"
 
 
 /**
@@ -27,7 +28,8 @@ const allDoctors = async (req: Request, res: Response) => {
     const { speciality } = req.query
 
     if (speciality) {
-      const response = await getAllDoctorsBySpeciality(speciality as Speciality)
+      const selectedSpeciality = specialities[parseInt(speciality.toString())]
+      const response = await getAllDoctorsBySpeciality(selectedSpeciality)
       return res.send(response)
     }
  

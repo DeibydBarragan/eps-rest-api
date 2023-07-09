@@ -22,6 +22,8 @@ export interface Doctor {
 export interface Appointment {
   patientId: string
   doctorId: string
+  date: string
+  hour: string
 }
 
 export type Speciality = 'Medicina general' | 'Cardiología' | 'Medicina interna' | 'Dermatología' | 'Rehabilitación física' | 'Psicología' | 'Odontología' | 'Radiología'

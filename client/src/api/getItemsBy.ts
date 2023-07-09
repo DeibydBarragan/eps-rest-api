@@ -1,5 +1,7 @@
 export const getItemsBy = async (endpoint:string, category:string, equalTo:string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}?${category}=${equalTo}`)
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/${endpoint}?${category}=${equalTo}`
+  console.log(url)
+  const res = await fetch(url)
   const data = await res.json()
   if (!res.ok) {
     if (res.status === 500) {

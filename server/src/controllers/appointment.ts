@@ -1,9 +1,10 @@
 import { Request, Response } from "express"
 import handleHttp from "../utils/error.handle"
-import { getAppointmentsByPatientId, getAppointments, insertAppointment, getAppointmentsByDoctorId, destroyAppointment, updateAppointment, getAppointmentById } from "../services/appointment"
+import { getAppointmentsByPatientId, getAppointments, insertAppointment, getAppointmentsByDoctorId, destroyAppointment, putAppointmentService } from "../services/appointment"
 import { getDoctorByCedula, getDoctorById } from "../services/doctor"
 import { getPatientByCedula, getPatientById } from "../services/patient"
 import { specialities } from "../constants/constants"
+import moment from "moment"
 
 //Create an appointment
 const postAppointment = async (req: Request, res: Response) => {
@@ -18,11 +19,15 @@ const postAppointment = async (req: Request, res: Response) => {
       handleHttp(res, 'PATIENT_NOT_FOUND')
       return
     }
+    
+    const date = moment(req.body.date + ' ' + req.body.hour, 'YYYY-MM-DD HH:mm').toDate()
+    console.log(date)
     const response = await insertAppointment({
       doctor: req.body.doctorId,
       patient: req.body.patientId,
       speciality: doctor.speciality,
-      office: doctor.office
+      office: doctor.office,
+      date: date
     })
     res.send(response)
   } catch (error) {
@@ -77,33 +82,29 @@ const searchAppointmentsByDoctorCedula = async (req: Request, res: Response) => 
 }
 
 //Patch an appointment
-const patchAppointment = async (req: Request, res: Response) => {
+const putAppointment = async (req: Request, res: Response) => {
   try {
+    const doctor = await getDoctorById(req.body.doctorId)
+    if (!doctor) {
+      handleHttp(res, 'DOCTOR_NOT_FOUND')
+      return
+    }
+    const patient = await getPatientById(req.body.patientId)
+    if (!patient) {
+      handleHttp(res, 'PATIENT_NOT_FOUND')
+      return
+    }
+
     const { id } = req.params
-    const { doctorId, patientId } = req.body
-    let data = {}
-    
-    if (doctorId) {
-      const doctor = await getDoctorById(doctorId)
-      if (!doctor) {
-        handleHttp(res, 'DOCTOR_NOT_FOUND')
-        return
-      }
+    const date = moment(req.body.date + ' ' + req.body.hour, 'YYYY-MM-DD HH:mm').toDate()
 
-      data = {
-        doctor: doctorId,
-        speciality: doctor.speciality,
-        office: doctor.office,
-      }
-    }
-    if (patientId) {
-      data = {
-        ...data,
-        patient: patientId
-      }
-    }
-
-    const response = await updateAppointment(id, data)
+    const response = await putAppointmentService(id, {
+      doctor: req.body.doctorId,
+      patient: req.body.patientId,
+      speciality: doctor.speciality,
+      office: doctor.office,
+      date
+    })
     res.send(response)
   } catch (error) {
     handleHttp(res, 'ERROR_UPDATING_APPOINTMENT', error)
@@ -127,6 +128,6 @@ export { listAppointments,
   postAppointment, 
   searchAppointmentsByPatientCedula, 
   searchAppointmentsByDoctorCedula,
-  patchAppointment,
+  putAppointment,
   deleteAppointment
 }

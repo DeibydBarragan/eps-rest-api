@@ -17,7 +17,7 @@ You have to install these tools
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## Data model
-
+![Data model](docs/dataModel.png)
 ## Installation and running
 
 **1. Clone this repo by running the following commands**
@@ -66,6 +66,173 @@ If you changed the PORT in the server, you also have to change it here like this
 
 Then go to http://localhost:3000 and use the client app
 
+## How to use the backend API?
+### Patients API
+#### Create a patient
+**Endpoint:** `POST /api/patients`
+##### Body example
+```json
+{
+  "name": "Deibyd Santiago",
+  "lastname": "Barragán Gaitán",
+  "cedula": 1069445930,
+  "age": 19,
+  "email": "deibydbarragan@hotmail.com",
+  "phone": 3134828849
+}
+```
+##### Example
+{video}
+
+#### Update a patient
+**Endpoint:** `PATCH /api/patients/{id}`
+##### Params
+- `id` (required): patient id.
+##### Body
+Use the fields to create patient that you need to update
+
+##### Example
+{video}
+
+#### Delete a patient
+**Endpoint:** `DELETE /api/patients/{id}`
+##### Params
+- `id` (required): patient id.
+
+##### Example
+{video}
+
+#### Get and paginate patients
+**Endpoint:** `GET /api/patients`
+##### Query params
+- `limit` (optional): limit the number of patients in every page.
+- `page` (optional): bring patients of an specific page.
+
+##### Example
+{video}
+
+### Doctors API
+
+#### Create a doctor
+**Endpoint:** `POST /api/doctors`
+##### Body example
+```json
+{
+  "name": "Pablo",
+  "lastname": "Casas Mejía",
+  "cedula": 221345443,
+  "speciality": "Cardiología",
+  "office": 205,
+  "email": "pablomejia@hotmail.com",
+  "phone": 3134828849
+}
+```
+##### Example
+{video}
+
+#### Update a doctor
+**Endpoint:** `PATCH /api/doctors/{id}`
+##### Params
+- `id` (required): doctor id.
+##### Body
+Use the fields to create patient that you need to update
+
+##### Example
+{video}
+
+#### Delete a doctor
+**Endpoint:** `DELETE /api/patients/{id}`
+##### Params
+- `id` (required): patient id.
+
+##### Example
+{video}
+
+#### Get all doctors without pagination and filter them by speciality
+**Endpoint:** `GET /api/allDoctors`
+##### Query params
+- `speciality` (optional): value must between 0 and 7. Filter doctors by their speciality.
+
+##### Example
+{video}
+
+#### Get and paginate doctors
+**Endpoint:** `GET /api/doctors`
+##### Query params
+- `limit` (optional): limit the number of doctors in every page.
+- `page` (optional): bring doctors of an specific page.
+
+##### Example
+{video}
+
+### Appointments API
+#### Create an appointment
+**Endpoint:** `POST /api/appointments`
+##### Body example
+```json
+{
+    "patientId": "64aa33e1f62c59d341c5bee1",
+    "doctorId": "64aa3c1218cd49789c2e0f00",
+    "date": "2023-10-18",
+    "hour": "08:30"
+}
+```
+- `date` (required): It must be a date in 'YYYY-MM-DD' format.
+- `hour` (required): It must be an hour in 'HH:mm' format, 24H format and 30 minutes format.
+
+##### Example
+{video}
+
+#### Update an appointment
+**Endpoint:** `PATCH /api/appointments/{id}`
+##### Params
+- `id` (required): appointment id.
+##### Body
+Use the fields to create patient that you need to update
+
+##### Example
+{video}
+
+#### Delete an appointment
+**Endpoint:** `DELETE /api/appointments/{id}`
+##### Params
+- `id` (required): appointment id.
+
+##### Example
+{video}
+
+#### Get appointments by patient's cedula
+**Endpoint:** `GET /api/appointments/patient/{id}`
+##### Params
+- `id` (required): patient id.
+
+##### Example
+{video}
+
+#### Get appointments by doctor's cedula
+**Endpoint:** `GET /api/appointments/doctor/{id}`
+##### Params
+- `id` (required): doctor id.
+
+##### Example
+{video}
+
+#### Get and paginate appointments
+**Endpoint:** `GET /api/appointments`
+##### Query params
+- `speciality` (optional): Get appointments by speciality.
+
+##### Example
+{video}
+
+## How to use the frontend API?
+{video}
+### For patients
+{video}
+### For doctors
+{video}
+### For appointments
+{video}
 ## Additionally this project uses:
 ### For Backend
 - [Mongoose](https://mongoosejs.com/)
@@ -73,6 +240,7 @@ Then go to http://localhost:3000 and use the client app
 - [Express validator](https://express-validator.github.io/docs/)
 - [Cors](https://www.npmjs.com/package/cors)
 - [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Momentjs](https://momentjs.com/)
 - [Eslint](https://eslint.org/)
 ### For frontend
 - [NextUI](https://nextui.org/)
@@ -80,6 +248,7 @@ Then go to http://localhost:3000 and use the client app
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
 - [Yup](https://www.npmjs.com/package/yup)
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react)
+- [Momentjs](https://momentjs.com/)
 - [ESlint](https://eslint.org/)
 
 

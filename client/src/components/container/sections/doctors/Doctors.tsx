@@ -74,7 +74,7 @@ export default function Doctors({}: Props) {
               <Table.Column>Apellido</Table.Column>
               <Table.Column>Cédula</Table.Column>
               <Table.Column>Especialidad</Table.Column>
-              <Table.Column>Oficina</Table.Column>
+              <Table.Column>Consultorio</Table.Column>
               <Table.Column>Correo electrónico</Table.Column>
               <Table.Column>Télefono</Table.Column>
               <Table.Column>Acciones</Table.Column>
@@ -104,7 +104,7 @@ export default function Doctors({}: Props) {
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
                           <PatchDoctor doctor={doctor} reload={getDoctors} />
                           <DeleteItem
-                            endpoint={`doctors/${doctor._id}`} 
+                            endpoint={`doctors/${doctor?._id}`} 
                             name='doctor'
                             reload={getDoctors}
                           />

@@ -5,6 +5,8 @@ import SearchAppointments from '@/components/forms/appointments/SearchAppointmen
 import { useState } from 'react'
 import DeleteItem from '@/components/common/deleteItem/DeleteItem'
 import { MoreHorizontal, RotateCw } from 'lucide-react'
+import moment from 'moment'
+import PutAppointment from '@/components/forms/appointments/PutAppointment'
 
 type Props = {}
 
@@ -78,8 +80,10 @@ export default function Appointments({}: Props) {
             <Table.Header>
               <Table.Column>Cedula paciente</Table.Column>
               <Table.Column>Cedula doctor</Table.Column>
-              <Table.Column>Oficina</Table.Column>
+              <Table.Column>Consultorio</Table.Column>
               <Table.Column>Especialidad</Table.Column>
+              <Table.Column>Fecha</Table.Column>
+              <Table.Column>Hora</Table.Column>
               <Table.Column>Acciones</Table.Column>
             </Table.Header>
             <Table.Body>
@@ -89,6 +93,12 @@ export default function Appointments({}: Props) {
                   <Table.Cell>{appointment?.doctor?.cedula}</Table.Cell>
                   <Table.Cell>{appointment?.office}</Table.Cell>
                   <Table.Cell>{appointment?.speciality}</Table.Cell>
+                  <Table.Cell>
+                    {moment(appointment?.date).format('YYYY-MM-DD')}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {moment(appointment?.date).format('HH:mm')}
+                  </Table.Cell>
                   <Table.Cell 
                     css={{
                       display: "flex",
@@ -102,8 +112,9 @@ export default function Appointments({}: Props) {
                       </Popover.Trigger>
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
+                          <PutAppointment appointment={appointment} reload={getAppointments}/>
                           <DeleteItem
-                            endpoint={`appointments/${appointment._id}`} 
+                            endpoint={`appointments/${appointment?._id}`} 
                             name='cita'
                             reload={getAppointments}
                           />

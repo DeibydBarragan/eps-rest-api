@@ -26,7 +26,7 @@ const validatePatchPatient = [
   check("cedula")
     .optional()
     .isInt().withMessage("Cedula must be an integer")
-    .isLength({ min: 10, max: 10 }).withMessage("Cedula must be 10 characters long")
+    .isLength({ min: 1, max: 11 }).withMessage("Cedula must be 1 to 11 characters long")
     .custom(async (value, { req }) => {
       /**
        * Check is value is bigger than 0

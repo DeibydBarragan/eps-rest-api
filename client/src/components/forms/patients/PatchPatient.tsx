@@ -47,7 +47,7 @@ export default function PatchPatient({ patient, reload }: Props) {
 
     try {
       setIsLoading(true)
-      await patchItem('patients', data, patient._id)
+      await patchItem('patients', data, patient?._id)
       toast.success('El paciente fue actualizado correctamente')
       closeHandler()
     } catch(err) {

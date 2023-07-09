@@ -13,8 +13,8 @@ export const postDoctorSchema = yup.object().shape({
   cedula: yup
     .number()
     .typeError('La cedula es requerida')
-    .min(1000000000, 'La cedula tiene que tener 10 caracteres')
-    .max(9999999999, 'La cedula tiene que tener 10 caracteres'),
+    .min(1, 'La cedula tiene que tener mímimo 1 caracteres')
+    .max(99999999999, 'La cedula tiene que tener máximo 11 caracteres'),
   speciality: yup
     .string()
     .required('La especialidad es requerida')

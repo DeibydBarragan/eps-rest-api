@@ -52,7 +52,7 @@ export default function PatchDoctor({ doctor, reload }: Props) {
 
     try {
       setIsLoading(true)
-      await patchItem('doctors', data, doctor._id)
+      await patchItem('doctors', data, doctor?._id)
       toast.success('El doctor fue actualizado correctamente')
       closeHandler()
     } catch(err) {

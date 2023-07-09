@@ -28,7 +28,7 @@ doctorRoutes.post("/api/doctors", validatePostDoctor, postDoctor)
 
 /**
  * [PATCH]
- * Create a doctor
+ * Update a doctor
  */
 doctorRoutes.patch("/api/doctors/:id", validatePatchDoctor, patchDoctor)
 

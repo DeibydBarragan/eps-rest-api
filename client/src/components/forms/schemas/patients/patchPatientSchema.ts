@@ -15,9 +15,9 @@ export const patchPatientSchema = yup.object().shape({
     }),
   cedula: yup
     .string()
-    .test('length', 'La cédula tiene que tener 10 carácteres', (value) => {
+    .test('length', 'La cédula tiene que tener mínimo 1 y máximo 10 carácteres', (value) => {
       if (!value) return true
-      return value.length === 10 && parseInt(value) >= 0
+      return value.length <= 11 && value.length >= 1
     }),
   age: yup
     .string()

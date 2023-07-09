@@ -5,5 +5,6 @@ export interface Appointment {
   doctor: Types.ObjectId
   speciality: 'Medicina general' | 'Cardiología' | 'Medicina interna' | 'Dermatología' | 'Rehabilitación física' | 'Psicología' | 'Odontología' | 'Radiología'
   office: number
+  date: Date
   deleted_at?: Date
 }

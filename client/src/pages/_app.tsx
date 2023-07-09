@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       colors: {
         background: '#1d1d1d',
         text: '#fff',
-        DarkColor: '#ff4ecd'
+        DarkColor: '#ff4ecd',
       },
       space: {},
       fonts: {}

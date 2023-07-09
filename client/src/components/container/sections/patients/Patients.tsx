@@ -102,7 +102,7 @@ export default function Patients({}: Props) {
                           <PostAppointment patient={patient}/>
                           <PatchPatient patient={patient} reload={getPatients}/>
                           <DeleteItem 
-                            endpoint={`patients/${patient._id}`} 
+                            endpoint={`patients/${patient?._id}`} 
                             name='paciente'
                             reload={getPatients}
                           />

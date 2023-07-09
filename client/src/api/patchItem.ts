@@ -1,4 +1,3 @@
-import { Appointment, Doctor, Patient } from "@/interfaces/interfaces"
 import { Endpoint } from "./types"
 
 export const patchItem = async (endpoint: Endpoint, item: object, id:string) => {

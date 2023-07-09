@@ -4,7 +4,8 @@ import AppointmentModel from "../models/appointment"
 //Get all appointments and paginate
 const getAppointments = async (limit:string = '10', page:string = '1', speciality:null | string = null) => {
   const query = speciality ? { speciality, deleted_at: null } : { deleted_at: null }
-  return await AppointmentModel.paginate(query, { 
+  return await AppointmentModel.paginate(query, {
+    sort: { date: 1 },
     limit: parseInt(limit), 
     page: parseInt(page), 
     populate: ['patient', 'doctor'] 
@@ -21,7 +22,8 @@ const getAppointmentsByPatientId = async (id: string, limit:string = '10', page:
   return await AppointmentModel.paginate({
     patient: id, 
     deleted_at: null 
-  }, { 
+  }, {
+    sort: { date: 1 },
     limit: parseInt(limit), 
     page: parseInt(page), 
     populate: ['patient', 'doctor'] 
@@ -34,10 +36,27 @@ const getAppointmentsByDoctorId = async (id: string, limit:string = '10', page:s
     doctor: id,
     deleted_at: null 
   }, { 
+    sort: { date: 1 },
     limit: parseInt(limit), 
     page: parseInt(page), 
     populate: ['patient', 'doctor'] 
   })
+}
+
+//Get all appointments by doctor's id
+const getAllAppointmentsByDoctorId = async (id: string) => {
+  return await AppointmentModel.find({
+    doctor: id,
+    deleted_at: null
+  }).populate(['patient', 'doctor'])
+}
+
+//Get all appointments by patient's id
+const getAllAppointmentsByPatientId = async (id: string) => {
+  return await AppointmentModel.find({
+    patient: id,
+    deleted_at: null
+  }).populate(['patient', 'doctor'])
 }
 
 //Insert appointment
@@ -46,8 +65,8 @@ const insertAppointment = async (appointment: Appointment) => {
 }
 
 //Update appointment
-const updateAppointment = async (id: string, appointment: Object) => {
-  return await AppointmentModel.findByIdAndUpdate(id, appointment)
+const putAppointmentService = async (id: string, appointment: Appointment) => {
+  return await AppointmentModel.findByIdAndUpdate(id, appointment, { new: true })
 }
 
 //Delete appointment
@@ -60,6 +79,8 @@ export { insertAppointment,
   getAppointmentById, 
   getAppointmentsByPatientId, 
   getAppointmentsByDoctorId, 
-  updateAppointment,
+  getAllAppointmentsByDoctorId,
+  getAllAppointmentsByPatientId,
+  putAppointmentService,
   destroyAppointment 
 }
