@@ -258,13 +258,13 @@ Use the fields to create patient that you need to update
 {video}
 
 ## How to use the frontend API?
-{video}
 ### For patients
 {video}
 ### For doctors
 {video}
 ### For appointments
-{video}
+![Appointments](docs/appointments/frontend/appointments.mp4)
+
 ## Additionally this project uses:
 ### For Backend
 - [Mongoose](https://mongoosejs.com/)
