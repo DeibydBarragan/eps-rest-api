@@ -1,14 +1,19 @@
-import { Request, Response } from "express"
-import handleHttp from "../utils/error.handle"
-import { paginateDoctors, getAllDoctors, getAllDoctorsBySpeciality, insertDoctor, destroyDoctor, updateDoctor } from "../services/doctor"
-import { Speciality } from "../types/types"
-import { specialities } from "../constants/constants"
-
+import { type Request, type Response } from 'express'
+import handleHttp from '../utils/error.handle'
+import {
+  paginateDoctors,
+  getAllDoctors,
+  getAllDoctorsBySpeciality,
+  insertDoctor,
+  destroyDoctor,
+  updateDoctor
+} from '../services/doctor'
+import { specialities } from '../constants/constants'
 
 /**
  * list and paginate doctors
  */
-const listDoctors = async (req: Request, res: Response) => {
+const listDoctors = async (req: Request, res: Response): Promise<void> => {
   try {
     const { limit, page } = req.query
 
@@ -23,16 +28,15 @@ const listDoctors = async (req: Request, res: Response) => {
  * get all doctors
  * or get all doctors by speciality
  */
-const allDoctors = async (req: Request, res: Response) => {
+const allDoctors = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { speciality } = req.query
-
-    if (speciality) {
-      const selectedSpeciality = specialities[parseInt(speciality.toString())]
+    if (req.query.speciality) {
+      const selectedSpeciality =
+        specialities[parseInt(JSON.stringify(req.query.speciality).toString())]
       const response = await getAllDoctorsBySpeciality(selectedSpeciality)
-      return res.send(response)
+      res.send(response)
     }
- 
+
     const response = await getAllDoctors()
     res.send(response)
   } catch (error) {
@@ -43,7 +47,7 @@ const allDoctors = async (req: Request, res: Response) => {
 /**
  * Create a doctor in the database
  */
-const postDoctor = async (req: Request, res: Response) => {
+const postDoctor = async (req: Request, res: Response): Promise<void> => {
   try {
     const response = await insertDoctor(req.body)
     res.send(response)
@@ -55,10 +59,10 @@ const postDoctor = async (req: Request, res: Response) => {
 /**
  * Update a doctor in the database
  */
-const patchDoctor = async (req: Request, res: Response) => {
+const patchDoctor = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const response = await updateDoctor( id, req.body)
+    const response = await updateDoctor(id, req.body)
     res.send(response)
   } catch (error) {
     handleHttp(res, 'ERROR_UPDATING_DOCTOR', error)
@@ -68,7 +72,7 @@ const patchDoctor = async (req: Request, res: Response) => {
 /**
  * Delete a doctor in the database
  */
-const deleteDoctor = async (req: Request, res: Response) => {
+const deleteDoctor = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params
     const response = await destroyDoctor(id)
@@ -78,9 +82,4 @@ const deleteDoctor = async (req: Request, res: Response) => {
   }
 }
 
-export { listDoctors, 
-  allDoctors, 
-  postDoctor,
-  patchDoctor,
-  deleteDoctor
-}
+export { listDoctors, allDoctors, postDoctor, patchDoctor, deleteDoctor }

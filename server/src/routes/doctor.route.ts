@@ -1,8 +1,14 @@
-import { Router } from "express"
-import { listDoctors, allDoctors, postDoctor, deleteDoctor, patchDoctor } from "../controllers/doctor"
-import { validatePostDoctor } from "../validators/doctors/postDoctors"
-import { validateDeleteDoctor } from "../validators/doctors/deleteDoctor"
-import { validatePatchDoctor } from "../validators/doctors/patchDoctor"
+import { Router } from 'express'
+import {
+  listDoctors,
+  allDoctors,
+  postDoctor,
+  deleteDoctor,
+  patchDoctor
+} from '../controllers/doctor'
+import { validatePostDoctor } from '../validators/doctors/postDoctors'
+import { validateDeleteDoctor } from '../validators/doctors/deleteDoctor'
+import { validatePatchDoctor } from '../validators/doctors/patchDoctor'
 
 const doctorRoutes = Router()
 
@@ -11,31 +17,31 @@ const doctorRoutes = Router()
  * Get doctors
  * [GET]
  */
-doctorRoutes.get("/api/doctors", listDoctors)
+doctorRoutes.get('/api/doctors', listDoctors)
 
 /**
  * http://localhost:PORT/api/allDoctors
  * Get all doctors or get all doctors by speciality
  * [GET]
  */
-doctorRoutes.get("/api/allDoctors", allDoctors)
+doctorRoutes.get('/api/allDoctors', allDoctors)
 
 /**
  * [POST]
  * Create a doctor
  */
-doctorRoutes.post("/api/doctors", validatePostDoctor, postDoctor)
+doctorRoutes.post('/api/doctors', validatePostDoctor, postDoctor)
 
 /**
  * [PATCH]
  * Update a doctor
  */
-doctorRoutes.patch("/api/doctors/:id", validatePatchDoctor, patchDoctor)
+doctorRoutes.patch('/api/doctors/:id', validatePatchDoctor, patchDoctor)
 
 /**
  * [DELETE]
  * Delete a doctor
  */
-doctorRoutes.delete("/api/doctors/:id", validateDeleteDoctor, deleteDoctor)
+doctorRoutes.delete('/api/doctors/:id', validateDeleteDoctor, deleteDoctor)
 
 export default doctorRoutes

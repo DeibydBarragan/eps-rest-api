@@ -13,10 +13,9 @@ import { filterPropertiesWithValues, isEmptyObject } from '@/utils/utils'
 
 type Props = {
   doctor: Doctor
-  reload: () => void
 }
 
-export default function PatchDoctor({ doctor, reload }: Props) {
+export default function PatchDoctor({ doctor }: Props) {
   // Modal state
   const { visible, setVisible } = useModal()
 

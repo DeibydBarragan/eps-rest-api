@@ -1,6 +1,6 @@
-import mongoose, { Schema, SchemaTypes } from "mongoose"
-import { Appointment } from "../interfaces/appointment.interface"
-import paginate from 'mongoose-paginate-v2';
+import mongoose, { Schema, SchemaTypes } from 'mongoose'
+import { type Appointment } from '../interfaces/appointment.interface'
+import paginate from 'mongoose-paginate-v2'
 
 const AppointmentSchema = new Schema<Appointment>(
   {
@@ -9,11 +9,11 @@ const AppointmentSchema = new Schema<Appointment>(
     speciality: { type: String, required: true },
     date: { type: Date, required: true },
     office: { type: Number, required: true },
-    deleted_at: { type: Date, default: null },
+    deleted_at: { type: Date, default: null }
   },
   {
     timestamps: true,
-    versionKey: false,
+    versionKey: false
   }
 )
 
@@ -27,6 +27,6 @@ interface AppointmentDocument extends mongoose.Document, Appointment {}
 const AppointmentModel = mongoose.model<
   AppointmentDocument,
   mongoose.PaginateModel<AppointmentDocument>
->('appointment', AppointmentSchema, 'appointments');
+>('appointment', AppointmentSchema, 'appointments')
 
 export default AppointmentModel

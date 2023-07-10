@@ -112,11 +112,10 @@ export default function Appointments({}: Props) {
                       </Popover.Trigger>
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
-                          <PutAppointment appointment={appointment} reload={getAppointments}/>
+                          <PutAppointment appointment={appointment} />
                           <DeleteItem
                             endpoint={`appointments/${appointment?._id}`} 
                             name='cita'
-                            reload={getAppointments}
                           />
                         </Row>
                       </Popover.Content>

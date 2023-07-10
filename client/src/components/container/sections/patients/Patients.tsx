@@ -100,11 +100,10 @@ export default function Patients({}: Props) {
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
                           <PostAppointment patient={patient}/>
-                          <PatchPatient patient={patient} reload={getPatients}/>
+                          <PatchPatient patient={patient} />
                           <DeleteItem 
                             endpoint={`patients/${patient?._id}`} 
                             name='paciente'
-                            reload={getPatients}
                           />
                         </Row>
                       </Popover.Content>

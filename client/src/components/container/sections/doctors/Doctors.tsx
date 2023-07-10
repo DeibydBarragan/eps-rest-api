@@ -102,11 +102,10 @@ export default function Doctors({}: Props) {
                       </Popover.Trigger>
                       <Popover.Content css={{ zIndex: "200 !important", p: '$4' }}>
                         <Row css={{gap: '$4', flexDirection: 'column'}}>
-                          <PatchDoctor doctor={doctor} reload={getDoctors} />
+                          <PatchDoctor doctor={doctor} />
                           <DeleteItem
                             endpoint={`doctors/${doctor?._id}`} 
                             name='doctor'
-                            reload={getDoctors}
                           />
                         </Row>
                       </Popover.Content>

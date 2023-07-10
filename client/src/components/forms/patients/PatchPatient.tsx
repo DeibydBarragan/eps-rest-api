@@ -12,10 +12,9 @@ import { patchPatientSchema } from '../schemas/patients/patchPatientSchema'
 
 type Props = {
   patient: Patient
-  reload: () => void
 }
 
-export default function PatchPatient({ patient, reload }: Props) {
+export default function PatchPatient({ patient }: Props) {
   // Modal state
   const { visible, setVisible } = useModal()
 

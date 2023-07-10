@@ -7,10 +7,9 @@ import { deleteItem } from '@/api/deleteItem'
 type Props = {
   endpoint: string
   name: string
-  reload: () => void
 }
 
-export default function DeleteItem({endpoint, name, reload}: Props) {
+export default function DeleteItem({ endpoint, name }: Props) {
   const [visible, setVisible] = useState(false)
 
   // Loading fetch state
@@ -26,7 +25,6 @@ export default function DeleteItem({endpoint, name, reload}: Props) {
       setIsLoading(true)
       await deleteItem(endpoint)
       closeHandler()
-      reload()
     } catch(err) {
       toast.error(`Hubo un error al eliminar el/la ${name}`)
     } finally {

@@ -2,4 +2,5 @@
 /docs/appointments
 /docs/doctors
 /docs/patients
+/dist
 .env

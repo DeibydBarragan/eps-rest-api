@@ -1,32 +1,44 @@
-import { check, param } from "express-validator"
-import validateResult from "../../utils/validate.handle"
-import { NextFunction, Request, Response } from "express"
-import { getPatientByCedula, getPatientByEmail, getPatientById } from "../../services/patient"
+import { check, param } from 'express-validator'
+import validateResult from '../../utils/validate.handle'
+import { type NextFunction, type Request, type Response } from 'express'
+import {
+  getPatientByCedula,
+  getPatientByEmail,
+  getPatientById
+} from '../../services/patient'
 
 const validatePatchPatient = [
   param('id')
-    .notEmpty().withMessage('El parámetro "id" no debe estar vacío')
-    .isMongoId().withMessage('El parámetro "id" debe ser un ID de MongoDB válido')
+    .notEmpty()
+    .withMessage('El parámetro "id" no debe estar vacío')
+    .isMongoId()
+    .withMessage('El parámetro "id" debe ser un ID de MongoDB válido')
     .custom(async (value) => {
       /**
        * Check if patient exists
        */
       const patient = await getPatientById(value)
-      if (!patient) throw new Error('Patient does not exist')
-      else if (patient.deleted_at) throw new Error('Patient is deleted')
+      if (patient == null) throw new Error('Patient does not exist')
+      else if (patient.deleted_at != null) throw new Error('Patient is deleted')
     }),
-  check("name")
+  check('name')
     .optional()
-    .isString().withMessage("Name must be a string")
-    .isLength({ min: 3 }).withMessage("Name must be at least 3 characters long"),
-  check("lastname")
+    .isString()
+    .withMessage('Name must be a string')
+    .isLength({ min: 3 })
+    .withMessage('Name must be at least 3 characters long'),
+  check('lastname')
     .optional()
-    .isString().withMessage("Lastname must be a string")
-    .isLength({ min: 3 }).withMessage("Lastname must be at least 3 characters long"),
-  check("cedula")
+    .isString()
+    .withMessage('Lastname must be a string')
+    .isLength({ min: 3 })
+    .withMessage('Lastname must be at least 3 characters long'),
+  check('cedula')
     .optional()
-    .isInt().withMessage("Cedula must be an integer")
-    .isLength({ min: 1, max: 11 }).withMessage("Cedula must be 1 to 11 characters long")
+    .isInt()
+    .withMessage('Cedula must be an integer')
+    .isLength({ min: 1, max: 11 })
+    .withMessage('Cedula must be 1 to 11 characters long')
     .custom(async (value, { req }) => {
       /**
        * Check is value is bigger than 0
@@ -36,15 +48,21 @@ const validatePatchPatient = [
        * Check if cedula is already in use by another patient
        */
       const patient = await getPatientByCedula(value)
-      if (patient && req.params && patient._id.toString() !== req.params.id) {
-        throw new Error("Cedula already in use")
+      if (
+        patient != null &&
+        req.params != null &&
+        patient._id.toString() !== req.params.id
+      ) {
+        throw new Error('Cedula already in use')
       }
       return true
     }),
-  check("age")
+  check('age')
     .optional()
-    .isInt().withMessage("Age must be an integer")
-    .isLength({ min: 1, max: 3 }).withMessage("Age must be 1 to 3 characters long")
+    .isInt()
+    .withMessage('Age must be an integer')
+    .isLength({ min: 1, max: 3 })
+    .withMessage('Age must be 1 to 3 characters long')
     .custom((value) => {
       /**
        * Check if age is between 0 and 135
@@ -54,22 +72,28 @@ const validatePatchPatient = [
       }
       return true
     }),
-  check("email")
+  check('email')
     .optional()
-    .isEmail().withMessage("Email must be a valid email")
+    .isEmail()
+    .withMessage('Email must be a valid email')
     .custom(async (value, { req }) => {
       /**
        * Check if email is already in use by another patient
        */
       const patient = await getPatientByEmail(value)
-      if (patient && req.params && patient._id.toString() !== req.params?.id) {
-        throw new Error("Email already in use")
+      if (
+        patient != null &&
+        req.params != null &&
+        patient._id.toString() !== req.params?.id
+      ) {
+        throw new Error('Email already in use')
       }
       return true
     }),
-  check("phone")
+  check('phone')
     .optional()
-    .isInt().withMessage("Phone must be an integer")
+    .isInt()
+    .withMessage('Phone must be an integer')
     .custom((value) => {
       /**
        * Check is value is bigger than 0
@@ -79,10 +103,11 @@ const validatePatchPatient = [
       }
       return true
     })
-    .isLength({ min: 10, max: 10 }).withMessage("Phone must be 10 characters long"),
+    .isLength({ min: 10, max: 10 })
+    .withMessage('Phone must be 10 characters long'),
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next)
-  },
+  }
 ]
 
 export { validatePatchPatient }

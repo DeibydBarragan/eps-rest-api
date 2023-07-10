@@ -35,8 +35,8 @@ You have to install these tools
 **3. Create a .env file and add there the following**
 
 ```
-PORT = 8000
-MONGO_URI = *YOUR MONGODB DATABASE URI*
+PORT=8000
+MONGO_URI=*YOUR MONGODB DATABASE URI*
 ```
 You can change the port but don't use **3000** because that port is used by the client app
 
@@ -65,6 +65,38 @@ If you changed the PORT in the server, you also have to change it here like this
 `npm run dev`
 
 Then go to http://localhost:3000 and use the client app
+
+## Build and run backend API with Docker
+To execute the backend app in a docker container:
+
+1. Make sure you have docker installed on your system
+2. Open the **server** root directory in the terminal
+3. Execute the following command
+
+   ```shell
+   docker build -t eps-rest-api .
+
+4. Then run the following command:
+   ```shell
+   docker run --env-file=./.env -p 8000:8000 eps-rest-api:latest .
+  
+  Now you can use the api from http://localhost:8000/api
+
+## Build and run frontend API with Docker
+To execute the frontend app in a docker container:
+
+1. Make sure you have docker installed on your system
+2. Open the **client** root directory in the terminal
+3. Execute the following command
+
+   ```shell
+   docker build -t eps-client-api .
+
+4. Then run the following command:
+   ```shell
+   docker run --env-file=./.env.local -p 3000:3000 eps-client-api:latest .
+  
+  Now you can use the frontend app from http://localhost:3000
 
 ## How to use the backend API?
 ### Patients API

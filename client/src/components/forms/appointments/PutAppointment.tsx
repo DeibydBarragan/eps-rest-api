@@ -23,10 +23,9 @@ interface Appointment {
 
 type Props = {
   appointment: Appointment
-  reload: () => void
 }
 
-export default function PutAppointment({appointment, reload}: Props) {
+export default function PutAppointment({ appointment }: Props) {
   // Modal state
   const { visible, setVisible } = useModal()
 
@@ -98,7 +97,6 @@ export default function PutAppointment({appointment, reload}: Props) {
         hour: formData.hour,
         date
       }, appointment?._id)
-      reload()
       toast.success('Cita editada correctamente')
     } catch (err) {
       let msg = 'Hubo un error al guardar la cita'

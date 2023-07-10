@@ -1,7 +1,6 @@
-import { Schema } from "mongoose"
-import { Patient } from "../interfaces/patient.interface"
+import mongoose, { Schema } from 'mongoose'
+import { type Patient } from '../interfaces/patient.interface'
 import paginate from 'mongoose-paginate-v2'
-import mongoose from "mongoose"
 
 const PatientSchema = new Schema<Patient>(
   {
@@ -11,11 +10,11 @@ const PatientSchema = new Schema<Patient>(
     age: { type: Number, required: true },
     email: { type: String, required: true },
     phone: { type: Number, required: true },
-    deleted_at: { type: Date, default: null },
+    deleted_at: { type: Date, default: null }
   },
   {
     timestamps: true,
-    versionKey: false,
+    versionKey: false
   }
 )
 
@@ -29,6 +28,6 @@ interface PatientDocument extends mongoose.Document, Patient {}
 const PatientModel = mongoose.model<
   PatientDocument,
   mongoose.PaginateModel<PatientDocument>
->('Patient', PatientSchema, 'patients');
+>('Patient', PatientSchema, 'patients')
 
 export default PatientModel

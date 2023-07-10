@@ -7,3 +7,9 @@ export interface Patient {
   phone: number
   deleted_at?: Date
 }
+
+export interface PatientDocument extends Patient {
+  _id: string
+  createdAt: Date
+  updatedAt: Date
+}

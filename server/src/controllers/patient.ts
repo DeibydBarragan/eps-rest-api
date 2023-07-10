@@ -1,11 +1,16 @@
-import { Request, Response } from "express"
-import handleHttp from "../utils/error.handle"
-import { insertPatient, getPatients, destroyPatient, updatePatient } from "../services/patient"
+import { type Request, type Response } from 'express'
+import handleHttp from '../utils/error.handle'
+import {
+  insertPatient,
+  getPatients,
+  destroyPatient,
+  updatePatient
+} from '../services/patient'
 
 /**
  * List and paginate a doctor in the database
  */
-const listPatients = async (req: Request, res: Response) => {
+const listPatients = async (req: Request, res: Response): Promise<void> => {
   try {
     const { limit, page } = req.query
     const response = await getPatients(limit?.toString(), page?.toString())
@@ -18,7 +23,7 @@ const listPatients = async (req: Request, res: Response) => {
 /**
  * Create a patient in the database
  */
-const postPatient = async (req: Request, res: Response) => {
+const postPatient = async (req: Request, res: Response): Promise<void> => {
   try {
     const response = await insertPatient(req.body)
     res.send(response)
@@ -30,10 +35,10 @@ const postPatient = async (req: Request, res: Response) => {
 /**
  * Update a pateint in the database
  */
-const patchPatient = async (req: Request, res: Response) => {
+const patchPatient = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params
-    const response = await updatePatient( id, req.body)
+    const response = await updatePatient(id, req.body)
     res.send(response)
   } catch (error) {
     handleHttp(res, 'ERROR_UPDATING_PATIENT', error)
@@ -43,7 +48,7 @@ const patchPatient = async (req: Request, res: Response) => {
 /**
  * Delete a patient in the database
  */
-const deletePatient = async (req: Request, res: Response) => {
+const deletePatient = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params
     const response = await destroyPatient(id)
@@ -53,8 +58,4 @@ const deletePatient = async (req: Request, res: Response) => {
   }
 }
 
-export { listPatients, 
-  postPatient,
-  patchPatient,
-  deletePatient
-}
+export { listPatients, postPatient, patchPatient, deletePatient }
