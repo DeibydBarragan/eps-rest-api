@@ -263,7 +263,8 @@ Use the fields to create patient that you need to update
 ### For doctors
 {video}
 ### For appointments
-![Appointments](docs/appointments/frontend/appointments.mp4)
+[![Appointments](docs/appointments/frontend/appointments.mp4)](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/263db8f0-1419-4df7-8f37-ec61af52446e
+)
 
 ## Additionally this project uses:
 ### For Backend
