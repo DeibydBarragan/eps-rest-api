@@ -7,7 +7,10 @@ You have to install these tools
 
 ## Features and Functionalities
 - Get a list of the appointments, patients and doctors in the database and their information
-- Create new appointments, patients and doctors in a NoSQL database
+- Create new appointments, patients and doctors in a MongoDB database
+- Update appointments, patients and doctors
+- Delete appointments, patients and doctors
+- Filter appointments by patient's cedula and doctor's cedula and filter by speciality
 
 ## Tech Stack
 - [MongoDB - Cloud](https://www.mongodb.com/products/platform/cloud)
@@ -46,7 +49,7 @@ You can change the port but don't use **3000** because that port is used by the 
 
 now you can test the API with Postman or another client on this url http://localhost:8000/api
 
-**5. Then, in another terminal go to the root folder and run the followind**
+**5. Then, in another terminal go to the root folder and run the following**
 
 `cd client`
 
@@ -96,7 +99,7 @@ To execute the frontend app in a docker container:
    ```shell
    docker run --env-file=./.env.local -p 3000:3000 eps-client-api:latest .
   
-  Now you can use the frontend app from http://localhost:3000
+  Now you can use the frontend app in http://localhost:3000
 
 ## How to use the backend API?
 ### Patients API
