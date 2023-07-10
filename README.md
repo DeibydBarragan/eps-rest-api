@@ -255,7 +255,7 @@ Use the fields to create patient that you need to update
 - `speciality` (optional): Get appointments by speciality.
 
 ##### Example
-{video}
+[Get, paginate and filter appointments](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/10a67eb3-9f89-4984-9267-73c4fbac3847)
 
 ## How to use the frontend API?
 ### For patients
