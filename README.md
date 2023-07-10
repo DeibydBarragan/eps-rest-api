@@ -173,7 +173,7 @@ Use the fields to create patient that you need to update
 Use the fields to create patient that you need to update
 
 ##### Example
-[Update doctor](https://github.com/DeibydBarragan/eps-rest-api/issues/3#issuecomment-1628160106)
+[Update doctor](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/0d61e370-86e9-4fc8-aa94-0a9d0f8b57fe)
 
 #### Delete a doctor
 **Endpoint:** `DELETE /api/patients/{id}`
