@@ -114,7 +114,7 @@ To execute the frontend app in a docker container:
 }
 ```
 ##### Example
-{video}
+[Post patient](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/8c99edee-8f22-472e-8078-09337c6b7848)
 
 #### Update a patient
 **Endpoint:** `PATCH /api/patients/{id}`
@@ -124,7 +124,7 @@ To execute the frontend app in a docker container:
 Use the fields to create patient that you need to update
 
 ##### Example
-{video}
+[Update patient](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/292fc287-9f90-4bf1-8b6a-0bace6aad2ca)
 
 #### Delete a patient
 **Endpoint:** `DELETE /api/patients/{id}`
@@ -132,7 +132,7 @@ Use the fields to create patient that you need to update
 - `id` (required): patient id.
 
 ##### Example
-{video}
+[Delete patient](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/3625a069-5cf5-4bdf-a50d-7247a048bb8c)
 
 #### Get and paginate patients
 **Endpoint:** `GET /api/patients`
@@ -141,7 +141,7 @@ Use the fields to create patient that you need to update
 - `page` (optional): bring patients of an specific page.
 
 ##### Example
-{video}
+[Get and paginate patients](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/bd4d4773-3068-4bbf-bc79-ca923e26d138)
 
 ### Doctors API
 
@@ -160,7 +160,7 @@ Use the fields to create patient that you need to update
 }
 ```
 ##### Example
-{video}
+[Create doctor](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/f53e773f-9598-4506-96f9-17e4fad721a0)
 
 #### Update a doctor
 **Endpoint:** `PATCH /api/doctors/{id}`
@@ -170,7 +170,7 @@ Use the fields to create patient that you need to update
 Use the fields to create patient that you need to update
 
 ##### Example
-{video}
+[Update doctor](https://github.com/DeibydBarragan/eps-rest-api/issues/3#issuecomment-1628160106)
 
 #### Delete a doctor
 **Endpoint:** `DELETE /api/patients/{id}`
@@ -178,7 +178,7 @@ Use the fields to create patient that you need to update
 - `id` (required): patient id.
 
 ##### Example
-{video}
+[Delete a doctor](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/15a8ae23-024b-4759-9deb-55b4657a64d2)
 
 #### Get all doctors without pagination and filter them by speciality
 **Endpoint:** `GET /api/allDoctors`
@@ -186,7 +186,7 @@ Use the fields to create patient that you need to update
 - `speciality` (optional): value must between 0 and 7. Filter doctors by their speciality.
 
 ##### Example
-{video}
+[Get all doctors without pagination and filter them by speciality](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/2fcf25ed-fd1e-479a-9a9f-97ee0a27d0dc)
 
 #### Get and paginate doctors
 **Endpoint:** `GET /api/doctors`
@@ -195,7 +195,7 @@ Use the fields to create patient that you need to update
 - `page` (optional): bring doctors of an specific page.
 
 ##### Example
-{video}
+[Get and paginate doctors](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/3adc7482-5a11-4752-9009-efe1c9ba117e)
 
 ### Appointments API
 #### Create an appointment
@@ -213,7 +213,7 @@ Use the fields to create patient that you need to update
 - `hour` (required): It must be an hour in 'HH:mm' format, 24H format and 30 minutes format.
 
 ##### Example
-{video}
+[Create an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/e9bb6265-0687-47d6-b875-17000344e691)
 
 #### Update an appointment
 **Endpoint:** `PATCH /api/appointments/{id}`
@@ -223,7 +223,7 @@ Use the fields to create patient that you need to update
 Use the fields to create patient that you need to update
 
 ##### Example
-{video}
+[Update an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/f22ed9b3-107f-4ef1-955e-4c870f2b893c)
 
 #### Delete an appointment
 **Endpoint:** `DELETE /api/appointments/{id}`
@@ -231,7 +231,7 @@ Use the fields to create patient that you need to update
 - `id` (required): appointment id.
 
 ##### Example
-{video}
+[Delete an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/4de773eb-0186-4756-a220-fbd9e1176649)
 
 #### Get appointments by patient's cedula
 **Endpoint:** `GET /api/appointments/patient/{id}`
@@ -239,7 +239,7 @@ Use the fields to create patient that you need to update
 - `id` (required): patient id.
 
 ##### Example
-{video}
+[Get appointments by patient's cedula](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/fb3b75b9-a1b3-4122-80c9-02577ff0dc6e)
 
 #### Get appointments by doctor's cedula
 **Endpoint:** `GET /api/appointments/doctor/{id}`
@@ -247,7 +247,7 @@ Use the fields to create patient that you need to update
 - `id` (required): doctor id.
 
 ##### Example
-{video}
+[Get appointments by doctor's cedula](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/5da6a4fe-d6b9-4148-8267-11def642c21c)
 
 #### Get and paginate appointments
 **Endpoint:** `GET /api/appointments`
@@ -259,9 +259,9 @@ Use the fields to create patient that you need to update
 
 ## How to use the frontend API?
 ### For patients
-{video}
+[Patients](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/8304074d-8b10-4cdf-b0d8-665ce8dc2864)
 ### For doctors
-{video}
+[![Doctors](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/ae03d297-2679-414b-896f-837cf3665512)](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/ae03d297-2679-414b-896f-837cf3665512)
 ### For appointments
 [![Appointments](docs/appointments/frontend/appointments.mp4)](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/263db8f0-1419-4df7-8f37-ec61af52446e
 )
