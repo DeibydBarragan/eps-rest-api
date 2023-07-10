@@ -81,7 +81,7 @@ To execute the backend app in a docker container:
 
 4. Then run the following command:
    ```shell
-   docker run --env-file=./.env -p 8000:8000 eps-rest-api:latest .
+   docker run --env-file=./.env -p 8000:8000 eps-rest-api:latest
   
   Now you can use the api from http://localhost:8000/api
 
@@ -97,7 +97,7 @@ To execute the frontend app in a docker container:
 
 4. Then run the following command:
    ```shell
-   docker run --env-file=./.env.local -p 3000:3000 eps-client-api:latest .
+   docker run --env-file=./.env.local -p 3000:3000 eps-client-api:latest
   
   Now you can use the frontend app in http://localhost:3000
 
