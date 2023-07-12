@@ -237,17 +237,17 @@ Use the fields to create patient that you need to update
 [Delete an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/4de773eb-0186-4756-a220-fbd9e1176649)
 
 #### Get appointments by patient's cedula
-**Endpoint:** `GET /api/appointments/patient/{id}`
+**Endpoint:** `GET /api/appointments/patient/{cedula}`
 ##### Params
-- `id` (required): patient id.
+- `cedula` (required): patient cedula.
 
 ##### Example
 [Get appointments by patient's cedula](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/fb3b75b9-a1b3-4122-80c9-02577ff0dc6e)
 
 #### Get appointments by doctor's cedula
-**Endpoint:** `GET /api/appointments/doctor/{id}`
+**Endpoint:** `GET /api/appointments/doctor/{cedula}`
 ##### Params
-- `id` (required): doctor id.
+- `cedula` (required): doctor cedula.
 
 ##### Example
 [Get appointments by doctor's cedula](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/5da6a4fe-d6b9-4148-8267-11def642c21c)
