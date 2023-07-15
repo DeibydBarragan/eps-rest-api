@@ -219,7 +219,7 @@ Use the fields to create patient that you need to update
 [Create an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/e9bb6265-0687-47d6-b875-17000344e691)
 
 #### Update an appointment
-**Endpoint:** `PATCH /api/appointments/{id}`
+**Endpoint:** `PUT /api/appointments/{id}`
 ##### Params
 - `id` (required): appointment id.
 ##### Body
