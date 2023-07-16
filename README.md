@@ -170,15 +170,15 @@ Use the fields to create patient that you need to update
 ##### Params
 - `id` (required): doctor id.
 ##### Body
-Use the fields to create patient that you need to update
+Use the fields to create a doctor that you need to update
 
 ##### Example
 [Update doctor](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/2e9c73be-a2a4-459a-9331-49a33632017e)
 
 #### Delete a doctor
-**Endpoint:** `DELETE /api/patients/{id}`
+**Endpoint:** `DELETE /api/doctors/{id}`
 ##### Params
-- `id` (required): patient id.
+- `id` (required): doctor id.
 
 ##### Example
 [Delete a doctor](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/f49f982b-a587-49ad-bacb-dc1ea04c2a70)
@@ -223,7 +223,7 @@ Use the fields to create patient that you need to update
 ##### Params
 - `id` (required): appointment id.
 ##### Body
-Use the fields to create patient that you need to update
+Use the fields to create an appointment that you need to update
 
 ##### Example
 [Update an appointment](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/b589a857-9686-484a-a29d-356be57d48d2)
