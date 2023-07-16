@@ -144,7 +144,7 @@ Use the fields to create patient that you need to update
 - `page` (optional): bring patients of an specific page.
 
 ##### Example
-[Get and paginate patients](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/bd4d4773-3068-4bbf-bc79-ca923e26d138)
+[Get and paginate patients](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/9eafeba1-2a0e-4a04-b37b-ba1dc14fd367)
 
 ### Doctors API
 
