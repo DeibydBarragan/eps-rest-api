@@ -4,10 +4,10 @@ import {
   listPatients,
   patchPatient,
   postPatient
-} from '../controllers/patient'
-import { validatePostPatient } from '../validators/patients/postPatient'
-import { validateDeletePatient } from '../validators/patients/deletePatient'
-import { validatePatchPatient } from '../validators/patients/patchPatient'
+} from '../controllers/patient.controller'
+import { validatePostPatient } from '../validators/patients/postPatient.validator'
+import { validateDeletePatient } from '../validators/patients/deletePatient.validator'
+import { validatePatchPatient } from '../validators/patients/patchPatient.validator'
 
 const patientRoutes = Router()
 

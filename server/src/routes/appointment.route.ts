@@ -6,10 +6,10 @@ import {
   postAppointment,
   searchAppointmentsByDoctorCedula,
   searchAppointmentsByPatientCedula
-} from '../controllers/appointment'
-import { validatePostAppointment } from '../validators/appointments/postAppointment'
-import { validateDeleteAppointment } from '../validators/appointments/deleteAppointment'
-import { validatePutAppointment } from '../validators/appointments/putAppointment'
+} from '../controllers/appointment.controller'
+import { validatePostAppointment } from '../validators/appointments/postAppointment.validator'
+import { validateDeleteAppointment } from '../validators/appointments/deleteAppointment.validator'
+import { validatePutAppointment } from '../validators/appointments/putAppointment.validator'
 
 const appointmentRoutes = Router()
 

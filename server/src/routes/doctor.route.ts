@@ -5,10 +5,10 @@ import {
   postDoctor,
   deleteDoctor,
   patchDoctor
-} from '../controllers/doctor'
-import { validatePostDoctor } from '../validators/doctors/postDoctors'
-import { validateDeleteDoctor } from '../validators/doctors/deleteDoctor'
-import { validatePatchDoctor } from '../validators/doctors/patchDoctor'
+} from '../controllers/doctor.controller'
+import { validatePostDoctor } from '../validators/doctors/postDoctors.validator'
+import { validateDeleteDoctor } from '../validators/doctors/deleteDoctor.validator'
+import { validatePatchDoctor } from '../validators/doctors/patchDoctor.validator'
 
 const doctorRoutes = Router()
 

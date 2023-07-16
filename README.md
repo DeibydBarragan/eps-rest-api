@@ -260,8 +260,10 @@ Use the fields to create patient that you need to update
 ## How to use the frontend API?
 ### For patients
 {video}
+
 ### For doctors
-{video}
+[Patients](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/ae03d297-2679-414b-896f-837cf3665512)
+
 ### For appointments
 [![Appointments](docs/appointments/frontend/appointments.mp4)](https://github.com/DeibydBarragan/eps-rest-api/assets/116578796/263db8f0-1419-4df7-8f37-ec61af52446e
 )

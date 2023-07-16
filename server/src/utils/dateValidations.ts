@@ -2,7 +2,7 @@ import moment from 'moment'
 import {
   getAllAppointmentsByDoctorId,
   getAllAppointmentsByPatientId
-} from '../services/appointment'
+} from '../services/appointment.services'
 
 // Check if date is in the future
 export const isInTheFuture = (value: Date): boolean => {
